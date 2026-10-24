@@ -4,6 +4,98 @@
 
 const STORAGE_KEY = 'battlecats_tracker_v1';
 const STORAGE_META_KEY = 'battlecats_tracker_meta_v1';
+const STORAGE_GAS_URL_KEY = 'battlecats_gas_url_v1';
+
+// 內建給使用者一鍵複製的 Google Apps Script 雙向同步後端程式碼
+const GAS_BACKEND_TEMPLATE = `/**
+ * 貓咪補完計劃 App — Google 試算表雙向雲端資料庫 API (Apps Script)
+ * 支援：
+ * 1. GET  讀取整張試算表 (770 筆貓咪與 70 欄狀態)
+ * 2. POST action="update" 即時更新單筆或多筆貓咪的 [獲得/三階/四階/本能/超本能]
+ * 3. POST action="init_full" 一鍵將 770 筆完整 70 欄資料寫入空白試算表
+ */
+
+function doGet() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const data = sheet.getDataRange().getDisplayValues();
+  if (!data || data.length <= 1) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, empty: true, records: [] }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  const headers = data[0].map(h => String(h).trim());
+  const records = [];
+  for (let r = 1; r < data.length; r++) {
+    const row = data[r];
+    if (!row[0] && !row[headers.indexOf('圖鑑')]) continue;
+    const obj = {};
+    for (let c = 0; c < headers.length; c++) {
+      obj[headers[c]] = row[c];
+    }
+    records.push(obj);
+  }
+  return ContentService.createTextOutput(JSON.stringify({ ok: true, headers, records }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+  try {
+    const payload = JSON.parse(e.postData.contents || '{}');
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+
+    // 模式 A：一鍵初始化空白試算表 (寫入完整 70 欄標題與 770 筆貓咪)
+    if (payload.action === 'init_full' && Array.isArray(payload.headers) && Array.isArray(payload.rows)) {
+      sheet.clearContents();
+      const matrix = [payload.headers, ...payload.rows];
+      sheet.getRange(1, 1, matrix.length, payload.headers.length).setValues(matrix);
+      return ContentService.createTextOutput(JSON.stringify({ ok: true, mode: 'init_full', count: payload.rows.length }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 模式 B：單筆或批次更新貓咪狀態 (獲得 / 三階 / 四階 / 本能 / 超本能)
+    const data = sheet.getDataRange().getDisplayValues();
+    if (!data || data.length === 0) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: '試算表為空，請先點擊「一鍵初始化空白試算表」' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    const headers = data[0].map(h => String(h).trim());
+    const idCol = headers.indexOf('圖鑑');
+    const colMap = {
+      obtained: headers.indexOf('獲得'),
+      tfDone: headers.indexOf('三階'),
+      ufDone: headers.indexOf('四階'),
+      instinct: headers.indexOf('本能'),
+      superInstinct: headers.indexOf('超本能')
+    };
+
+    const rowIndexMap = new Map();
+    for (let r = 1; r < data.length; r++) {
+      rowIndexMap.set(String(data[r][idCol]).trim(), r + 1);
+    }
+
+    const updates = payload.updates || [];
+    let updatedCount = 0;
+    updates.forEach(u => {
+      const rowNum = rowIndexMap.get(String(u.id).trim());
+      if (!rowNum) return;
+      Object.entries(colMap).forEach(([key, colIdx]) => {
+        if (colIdx !== -1 && u[key] !== undefined) {
+          sheet.getRange(rowNum, colIdx + 1).setValue(u[key] ? 'Yes' : 'No');
+        }
+      });
+      updatedCount++;
+    });
+
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, mode: 'update', updatedCount }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}`;
 
 // 稀有度順序與色票設定
 const RARITY_ORDER = ['基本', 'EX', '稀有', '激稀有', '超激稀有', '傳說稀有'];
@@ -230,6 +322,13 @@ const state = {
     groupKey: 'ALL',          // 'ALL' | 'regular' | 'fest' | 'seasonal' | 'collab' | 'other'
     sortBy: 'missing_count_desc', // 'missing_count_desc' | 'new_rate_desc' | 'uber_missing_desc' | 'completion_desc'
     onlyMissing: false        // 是否僅顯示未 100% 集滿的轉蛋池
+  },
+  cloud: {
+    gasUrl: '',               // Google Apps Script Web App URL (/exec)
+    status: 'unbound',        // 'unbound' | 'syncing' | 'synced' | 'error'
+    lastSyncMsg: '',
+    pendingQueue: new Map(),  // cat.id -> updateObj (防抖批次寫回佇列)
+    flushTimer: null
   },
   renderLimit: 60,        // 每次渲染筆數，滑動到底自動增加
   lastSavedAt: null
@@ -463,6 +562,261 @@ function initDatabase() {
 
   // 預設依圖鑑數值大小排序 (保留 604.1 小數點且正確排在 604 與 605 之間)
   state.cats.sort((a, b) => a.sortId - b.sortId);
+
+  // 讀取已綁定的 Google Apps Script URL
+  try {
+    const savedGasUrl = (localStorage.getItem(STORAGE_GAS_URL_KEY) || '').trim();
+    if (savedGasUrl) {
+      state.cloud.gasUrl = savedGasUrl;
+      const inputEl = document.getElementById('gas-url-input');
+      if (inputEl) inputEl.value = savedGasUrl;
+      updateCloudStatusUI('synced', '已綁定 Google 試算表（開啟時自動同步）');
+      // 啟動時非同步從 Google 試算表拉取最新狀態
+      setTimeout(() => pullFromGoogleSheet(true), 150);
+    } else {
+      updateCloudStatusUI('unbound', '狀態：尚未設定 Google 試算表 API 網址');
+    }
+  } catch (e) {}
+}
+
+// ============================================================================
+// 2B. ☁️ Google 試算表 (Apps Script) 雲端雙向同步引擎
+// ============================================================================
+function updateCloudStatusUI(status, message) {
+  state.cloud.status = status;
+  if (message) state.cloud.lastSyncMsg = message;
+
+  const dotEl = document.getElementById('cloud-status-dot');
+  const textEl = document.getElementById('cloud-status-text');
+  const badgeEl = document.getElementById('backup-cloud-badge');
+  const logEl = document.getElementById('gas-sync-log');
+
+  if (dotEl && textEl) {
+    if (status === 'syncing') {
+      dotEl.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
+      textEl.textContent = '同步中...';
+      textEl.className = 'font-bold text-[11px] text-amber-300 leading-tight';
+    } else if (status === 'synced') {
+      dotEl.className = 'w-2 h-2 rounded-full bg-emerald-400';
+      textEl.textContent = '已同步';
+      textEl.className = 'font-bold text-[11px] text-emerald-300 leading-tight';
+    } else if (status === 'error') {
+      dotEl.className = 'w-2 h-2 rounded-full bg-rose-500';
+      textEl.textContent = '同步失敗';
+      textEl.className = 'font-bold text-[11px] text-rose-400 leading-tight';
+    } else {
+      dotEl.className = 'w-2 h-2 rounded-full bg-slate-500';
+      textEl.textContent = '未綁定';
+      textEl.className = 'font-bold text-[11px] text-slate-300 leading-tight';
+    }
+  }
+
+  if (badgeEl) {
+    if (status === 'synced') {
+      badgeEl.textContent = '☁️ 雲端連線正常';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-mono shrink-0';
+    } else if (status === 'syncing') {
+      badgeEl.textContent = '⏳ 雲端同步中...';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs font-mono shrink-0';
+    } else if (status === 'error') {
+      badgeEl.textContent = '⚠️ 連線異常';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs font-mono shrink-0';
+    } else {
+      badgeEl.textContent = '未連線';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono shrink-0';
+    }
+  }
+
+  if (logEl && state.cloud.lastSyncMsg) {
+    logEl.textContent = state.cloud.lastSyncMsg;
+  }
+}
+
+/**
+ * 將單筆貓咪狀態加入防抖佇列，450ms 後自動批次 POST 寫回 Google 試算表
+ */
+function queueCloudCatUpdate(cat) {
+  if (!state.cloud.gasUrl) return;
+
+  state.cloud.pendingQueue.set(cat.id, {
+    id: cat.id,
+    obtained: cat.obtained,
+    tfDone: cat.tfDone,
+    ufDone: cat.ufDone,
+    instinct: cat.instinct,
+    superInstinct: cat.superInstinct
+  });
+
+  updateCloudStatusUI('syncing', `⏳ 正在將 #${cat.id} ${cat.name} 同步至 Google 試算表...`);
+
+  clearTimeout(state.cloud.flushTimer);
+  state.cloud.flushTimer = setTimeout(() => {
+    flushCloudUpdateQueue();
+  }, 450);
+}
+
+async function flushCloudUpdateQueue() {
+  if (!state.cloud.gasUrl || state.cloud.pendingQueue.size === 0) return;
+
+  const updates = Array.from(state.cloud.pendingQueue.values());
+  state.cloud.pendingQueue.clear();
+
+  try {
+    // 使用 text/plain 避免引發 CORS preflight (OPTIONS) 阻擋，GAS doPost 可直接讀取 e.postData.contents
+    const res = await fetch(state.cloud.gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'update', updates })
+    });
+    const data = await res.json();
+    if (!data || !data.ok) {
+      throw new Error(data?.error || '試算表回傳未知錯誤');
+    }
+    const timeStr = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    updateCloudStatusUI('synced', `✅ 已於 ${timeStr} 同步 ${updates.length} 筆修改至 Google 試算表`);
+  } catch (err) {
+    console.error('Google 試算表寫回失敗:', err);
+    updateCloudStatusUI('error', `❌ 雲端寫回失敗：${err.message}`);
+  }
+}
+
+/**
+ * 從 Google 試算表拉取最新資料 (GET)
+ */
+async function pullFromGoogleSheet(silent = false) {
+  const url = state.cloud.gasUrl;
+  if (!url) {
+    if (!silent) showToast('⚠️ 請先輸入並儲存 Google Apps Script 網址');
+    return;
+  }
+
+  updateCloudStatusUI('syncing', '⬇️ 正在從 Google 試算表拉取最新資料...');
+  try {
+    const sep = url.includes('?') ? '&' : '?';
+    const res = await fetch(`${url}${sep}_t=${Date.now()}`, { method: 'GET' });
+    const data = await res.json();
+
+    if (!data || !data.ok) {
+      throw new Error(data?.error || '回傳格式不正確');
+    }
+
+    if (data.empty || !Array.isArray(data.records) || data.records.length === 0) {
+      updateCloudStatusUI('synced', '💡 試算表目前是空白的，請點「🚀 一鍵初始化空白試算表(770筆)」寫入資料！');
+      if (!silent) showToast('試算表目前為空白，請點「一鍵初始化空白試算表」');
+      return;
+    }
+
+    const remoteCats = data.records.map(normalizeCatRecord).sort((a, b) => a.sortId - b.sortId);
+    state.cats = remoteCats;
+    saveToLocalStorage();
+
+    buildFilterControls();
+    updateGlobalCounters();
+    renderCatList(false);
+    renderMaterialDashboard();
+    renderGachaDashboard();
+
+    const timeStr = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    updateCloudStatusUI('synced', `✅ 已於 ${timeStr} 從 Google 試算表同步 ${remoteCats.length} 筆貓咪資料`);
+    if (!silent) showToast(`☁️ 已從試算表同步 ${remoteCats.length} 隻貓咪！`);
+  } catch (err) {
+    console.error('從 Google 試算表拉取失敗:', err);
+    updateCloudStatusUI('error', `❌ 拉取失敗：${err.message}（請確認部署權限設為「所有人」）`);
+    if (!silent) showToast(`❌ 雲端拉取失敗：${err.message}`);
+  }
+}
+
+/**
+ * 推送手機上目前所有貓咪的勾選狀態 (獲得/三階/四階/本能/超本能) 至已存在的試算表
+ */
+async function pushAllStatusesToGoogleSheet() {
+  const url = state.cloud.gasUrl;
+  if (!url) {
+    showToast('⚠️ 請先輸入並儲存 Google Apps Script 網址');
+    return;
+  }
+
+  updateCloudStatusUI('syncing', '⬆️ 正在將 770 筆勾選狀態推送至 Google 試算表...');
+  try {
+    const updates = state.cats.map(cat => ({
+      id: cat.id,
+      obtained: cat.obtained,
+      tfDone: cat.tfDone,
+      ufDone: cat.ufDone,
+      instinct: cat.instinct,
+      superInstinct: cat.superInstinct
+    }));
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'update', updates })
+    });
+    const data = await res.json();
+    if (!data || !data.ok) {
+      throw new Error(data?.error || '推送失敗');
+    }
+    const timeStr = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    updateCloudStatusUI('synced', `✅ 已於 ${timeStr} 完整推送 ${ data.updatedCount || updates.length } 筆狀態至試算表`);
+    showToast('☁️ 已將所有貓咪勾選進度推送至 Google 試算表！');
+  } catch (err) {
+    console.error('推送狀態失敗:', err);
+    updateCloudStatusUI('error', `❌ 推送失敗：${err.message}`);
+    showToast(`❌ 推送失敗：${err.message}`);
+  }
+}
+
+/**
+ * 一鍵將完整 70 欄標題與 770 筆貓咪資料寫入空白 Google 試算表
+ */
+async function initFullTableToGoogleSheet() {
+  const url = state.cloud.gasUrl;
+  if (!url) {
+    showToast('⚠️ 請先輸入並儲存 Google Apps Script 網址');
+    return;
+  }
+  if (!confirm('這會將目前 App 內的 770 筆貓咪與 70 個欄位完整寫入你的 Google 試算表第一頁。確定執行嗎？')) {
+    return;
+  }
+
+  updateCloudStatusUI('syncing', '🚀 正在將 770 筆完整 70 欄圖鑑寫入 Google 試算表（約需 3~6 秒）...');
+  try {
+    const headers = window.CSV_HEADERS || [
+      '名稱','三古種','三古薄','三彩石','三彩種','三彩薄','三惡種','三惡薄','三紅晶','三紅石','三紅種','三紅薄','三紫晶','三紫石','三紫種','三紫薄','三綠種','三綠薄','三翠晶','三翠石','三蒼晶','三蒼石','三藍種','三藍薄','三金種','三金薄','三階','三階XP','三黃晶','三黃石','三黃種','三黃薄','四古種','四古薄','四彩石','四彩種','四彩薄','四惡種','四惡薄','四紅晶','四紅石','四紅種','四紅薄','四紫晶','四紫石','四紫種','四紫薄','四綠種','四綠薄','四翠晶','四翠石','四蒼晶','四蒼石','四藍種','四藍薄','四金種','四金薄','四階','四階XP','四黃晶','四黃石','四黃種','四黃薄','圖鑑','所屬轉蛋池分類','本能','獲得','稀有度','超本能','開放進化狀態'
+    ];
+
+    const rows = state.cats.map(cat => {
+      const rowObj = { ...(cat._raw || {}) };
+      rowObj['圖鑑'] = cat.id;
+      rowObj['名稱'] = cat.name;
+      rowObj['稀有度'] = cat.rarity;
+      rowObj['所屬轉蛋池分類'] = cat.rawPoolStr;
+      rowObj['開放進化狀態'] = cat.maxEvo;
+      rowObj['獲得'] = cat.obtained ? 'Yes' : 'No';
+      rowObj['三階'] = cat.tfDone ? 'Yes' : 'No';
+      rowObj['四階'] = cat.ufDone ? 'Yes' : 'No';
+      rowObj['本能'] = cat.instinct ? 'Yes' : 'No';
+      rowObj['超本能'] = cat.superInstinct ? 'Yes' : 'No';
+      return headers.map(h => rowObj[h] ?? '');
+    });
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'init_full', headers, rows })
+    });
+    const data = await res.json();
+    if (!data || !data.ok) {
+      throw new Error(data?.error || '初始化寫入失敗');
+    }
+    const timeStr = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    updateCloudStatusUI('synced', `🎉 已於 ${timeStr} 成功將 ${data.count} 筆完整圖鑑寫入 Google 試算表！`);
+    showToast(`🎉 成功初始化 Google 試算表（共 ${data.count} 筆資料）！`);
+  } catch (err) {
+    console.error('初始化試算表失敗:', err);
+    updateCloudStatusUI('error', `❌ 初始化失敗：${err.message}`);
+    showToast(`❌ 初始化失敗：${err.message}`);
+  }
 }
 
 function saveToLocalStorage(toastMsg) {
@@ -552,6 +906,7 @@ function toggleCatStatus(catId, field) {
   }
 
   saveToLocalStorage(actionSummary);
+  queueCloudCatUpdate(cat);
   updateGlobalCounters();
   renderMaterialDashboard();
   renderGachaDashboard();
@@ -1658,7 +2013,63 @@ function bindEvents() {
     }
   });
 
-  // ==================== Tab 4: 匯出 / 匯入 / 重置按鈕 ====================
+  // ==================== Tab 4: 雲端同步與匯出 / 匯入 / 重置按鈕 ====================
+  document.getElementById('header-cloud-btn')?.addEventListener('click', () => {
+    switchTab('backup');
+  });
+
+  document.getElementById('save-gas-url-btn')?.addEventListener('click', () => {
+    const val = (document.getElementById('gas-url-input')?.value || '').trim();
+    if (!val) {
+      showToast('⚠️ 請貼上 Google Apps Script 網址');
+      return;
+    }
+    if (!val.startsWith('https://script.google.com/')) {
+      showToast('⚠️ 網址格式似乎不是 https://script.google.com/ 開頭');
+    }
+    state.cloud.gasUrl = val;
+    localStorage.setItem(STORAGE_GAS_URL_KEY, val);
+    showToast('✅ 已儲存雲端網址，正在測試連線...');
+    pullFromGoogleSheet(false);
+  });
+
+  document.getElementById('clear-gas-url-btn')?.addEventListener('click', () => {
+    state.cloud.gasUrl = '';
+    localStorage.removeItem(STORAGE_GAS_URL_KEY);
+    const inputEl = document.getElementById('gas-url-input');
+    if (inputEl) inputEl.value = '';
+    updateCloudStatusUI('unbound', '狀態：已解除 Google 試算表綁定（僅使用手機本機儲存）');
+    showToast('已解除 Google 試算表雲端綁定');
+  });
+
+  document.getElementById('cloud-pull-btn')?.addEventListener('click', () => {
+    pullFromGoogleSheet(false);
+  });
+
+  document.getElementById('cloud-push-status-btn')?.addEventListener('click', () => {
+    pushAllStatusesToGoogleSheet();
+  });
+
+  document.getElementById('cloud-init-full-sheet-btn')?.addEventListener('click', () => {
+    initFullTableToGoogleSheet();
+  });
+
+  document.getElementById('copy-gas-code-btn')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(GAS_BACKEND_TEMPLATE);
+      showToast('📋 已複製 Google Apps Script 程式碼！請貼到試算表的 Apps Script 中');
+    } catch (err) {
+      // Fallback copy
+      const ta = document.createElement('textarea');
+      ta.value = GAS_BACKEND_TEMPLATE;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('📋 已複製 Google Apps Script 程式碼！');
+    }
+  });
+
   document.getElementById('export-csv-btn').addEventListener('click', exportCSVFile);
   document.getElementById('export-json-btn').addEventListener('click', exportJSONFile);
 

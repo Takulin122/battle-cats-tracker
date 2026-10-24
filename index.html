@@ -149,6 +149,18 @@
 
       <!-- 頂部快速指標膠囊 -->
       <div class="flex items-center gap-1.5 text-xs">
+        <button
+          id="header-cloud-btn"
+          type="button"
+          title="點擊前往雲端同步設定"
+          class="bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-lg px-2 py-1 text-left transition flex items-center gap-1.5"
+        >
+          <span id="cloud-status-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+          <div>
+            <div class="text-[10px] text-slate-400 leading-tight">Google 雲端</div>
+            <div id="cloud-status-text" class="font-bold text-[11px] text-slate-300 leading-tight">未綁定</div>
+          </div>
+        </button>
         <div class="bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1 text-right">
           <div class="text-[10px] text-slate-400">圖鑑收集率</div>
           <div id="header-obtain-rate" class="font-bold text-amber-400">--%</div>
@@ -383,6 +395,111 @@
 
     <!-- ==================== TAB 4: 資料管理與備份 ==================== -->
     <section id="tab-backup" class="hidden space-y-4">
+      <!-- ☁️ Google 試算表雲端即時同步模組 -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/40 border border-sky-500/40 rounded-2xl p-4 space-y-3 shadow-xl">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+              ☁️ Google 試算表雲端即時同步
+            </h2>
+            <p class="text-xs text-slate-300 mt-0.5">
+              綁定你的 Google Sheets Apps Script 網址後，點擊任何貓咪按鈕都會自動背景寫回雲端試算表，支援 iPhone / iPad / Mac 跨裝置同步！
+            </p>
+          </div>
+          <span id="backup-cloud-badge" class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono shrink-0">
+            未連線
+          </span>
+        </div>
+
+        <!-- GAS Web App URL 輸入與儲存 -->
+        <div class="space-y-1.5">
+          <label for="gas-url-input" class="text-xs font-bold text-sky-300 block">
+            🔗 Google Apps Script 網頁應用程式網址 (Web App URL)
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input
+              id="gas-url-input"
+              type="url"
+              placeholder="https://script.google.com/macros/s/AKfycb.../exec"
+              class="flex-1 px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+            />
+            <div class="flex gap-1.5 shrink-0">
+              <button
+                id="save-gas-url-btn"
+                type="button"
+                class="btn-touch flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs transition shadow-lg shadow-sky-500/20"
+              >
+                儲存並測試連線
+              </button>
+              <button
+                id="clear-gas-url-btn"
+                type="button"
+                class="btn-touch px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition"
+              >
+                解除
+              </button>
+            </div>
+          </div>
+          <p id="gas-sync-log" class="text-[11px] text-slate-400 font-mono">
+            狀態：尚未設定 Google 試算表 API 網址
+          </p>
+        </div>
+
+        <!-- 三大雲端同步操作按鈕 -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+          <button
+            id="cloud-pull-btn"
+            type="button"
+            class="btn-touch py-2.5 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-500/40 text-sky-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+          >
+            <span>⬇️ 從試算表拉取最新資料</span>
+          </button>
+          <button
+            id="cloud-push-status-btn"
+            type="button"
+            class="btn-touch py-2.5 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+          >
+            <span>⬆️ 推送目前勾選進度至雲端</span>
+          </button>
+          <button
+            id="cloud-init-full-sheet-btn"
+            type="button"
+            class="btn-touch py-2.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+          >
+            <span>🚀 一鍵初始化空白試算表(770筆)</span>
+          </button>
+        </div>
+
+        <!-- 內建三步驟精靈與複製 GAS 程式碼 -->
+        <details class="bg-slate-950/90 border border-slate-800 rounded-xl p-3 text-xs">
+          <summary class="font-bold text-amber-400 cursor-pointer select-none flex items-center justify-between">
+            <span>📖 點此展開：3 分鐘綁定 Google 試算表教學 & 一鍵複製 GAS 程式碼</span>
+            <span class="text-[11px] text-slate-400">▾</span>
+          </summary>
+          <div class="mt-3 space-y-2.5 text-slate-300 leading-relaxed border-t border-slate-800 pt-2.5">
+            <ol class="list-decimal list-inside space-y-1.5 text-xs">
+              <li>開啟 <a href="https://sheets.new" target="_blank" rel="noopener" class="text-sky-400 underline font-bold">Google 試算表 (sheets.new)</a> 建立一張全新空白試算表（或已匯入 CSV 的試算表）。</li>
+              <li>點選試算表頂部選單 <strong>「擴充功能」→「Apps Script」</strong>，清空原本內容，點擊下方按鈕複製專用腳本貼上並按儲存（💾）：</li>
+            </ol>
+            <div class="flex items-center justify-between bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+              <span class="text-[11px] font-mono text-emerald-300">支援自動讀取、單筆即時寫回與 770 筆全表初始化</span>
+              <button
+                id="copy-gas-code-btn"
+                type="button"
+                class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs transition shrink-0"
+              >
+                📋 一鍵複製 Apps Script 程式碼
+              </button>
+            </div>
+            <ol start="3" class="list-decimal list-inside space-y-1.5 text-xs">
+              <li>在 Apps Script 右上角點擊 <strong>「部署」→「新增部署作業」</strong> → 左上齒輪選 <strong>「網頁應用程式」</strong>。</li>
+              <li><strong>執行身分</strong>選「我 (Me)」，<strong>誰可以存取</strong>務必選 <strong>「所有人 (Anyone)」</strong> → 點擊部署並核准權限。</li>
+              <li>複製產生的 <code>https://script.google.com/macros/s/.../exec</code> 貼回上方輸入框，再點 <strong>「🚀 一鍵初始化空白試算表(770筆)」</strong> 就大功告成！</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
       <!-- 儲存狀態總覽卡片 -->
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
