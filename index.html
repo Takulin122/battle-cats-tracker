@@ -9,70 +9,10 @@
   <meta name="theme-color" content="#f59e0b" />
   <title>貓咪補完計劃 — 貓咪大戰爭個人圖鑑與養成追蹤</title>
 
-  <!-- 內嵌高解析度 Apple Touch Icon (動態 Canvas PNG 產生器：金橘放射芒光 + 紅帽白貓) -->
+  <!-- 專屬 App 圖示 (源自 App photo.jpeg) -->
   <link rel="manifest" href="manifest.json" />
-  <link id="apple-touch-icon-link" rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23fbbf24' stroke='%23111111' stroke-width='8'/><circle cx='90' cy='102' r='54' fill='%23ffffff' stroke='%23111111' stroke-width='8'/><polygon points='46,72 38,26 76,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><polygon points='134,72 142,26 104,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><circle cx='70' cy='96' r='6.5' fill='%23111111'/><circle cx='110' cy='96' r='6.5' fill='%23111111'/><path d='M78,110 Q84,118 90,110 Q96,118 102,110' fill='none' stroke='%23111111' stroke-width='6' stroke-linecap='round'/></svg>" />
-  <script>
-    // 自動繪製《貓咪大戰爭》經典「金橘放射芒光＋粗黑邊紅帽貓咪」180x180 PNG 供 iOS 加入主畫面使用
-    (function(){
-      try {
-        var c = document.createElement('canvas');
-        c.width = 180; c.height = 180;
-        var ctx = c.getContext('2d');
-        // 1. 金黃/亮橘放射芒光背景 (源自圖片3)
-        ctx.fillStyle = '#fbbf24';
-        ctx.fillRect(0, 0, 180, 180);
-        ctx.fillStyle = '#f97316';
-        for (var i = 0; i < 16; i += 2) {
-          var a1 = (i * Math.PI) / 8;
-          var a2 = ((i + 1) * Math.PI) / 8;
-          ctx.beginPath();
-          ctx.moveTo(90, 105);
-          ctx.arc(90, 105, 160, a1, a2);
-          ctx.closePath();
-          ctx.fill();
-        }
-        // 2. 貓耳 (白底粗黑框)
-        ctx.fillStyle = '#ffffff';
-        ctx.strokeStyle = '#111111';
-        ctx.lineWidth = 7;
-        ctx.lineJoin = 'round';
-        ctx.beginPath(); ctx.moveTo(44, 72); ctx.lineTo(36, 26); ctx.lineTo(76, 52); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(136, 72); ctx.lineTo(144, 26); ctx.lineTo(104, 52); ctx.closePath(); ctx.fill(); ctx.stroke();
-        // 3. 貓臉圓形
-        ctx.beginPath(); ctx.arc(90, 102, 54, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        // 4. 經典 1P 紅色貝雷帽 (源自圖片1)
-        ctx.save();
-        ctx.translate(62, 50);
-        ctx.rotate(-0.22);
-        ctx.fillStyle = '#ef4444';
-        ctx.beginPath(); ctx.ellipse(0, 0, 22, 12, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        ctx.restore();
-        // 5. 眼睛與經典貓嘴 (ω)
-        ctx.fillStyle = '#111111';
-        ctx.beginPath(); ctx.arc(70, 94, 6.5, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(110, 94, 6.5, 0, Math.PI * 2); ctx.fill();
-        ctx.strokeStyle = '#111111';
-        ctx.lineWidth = 5.5;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(77, 108); ctx.quadraticCurveTo(83.5, 117, 90, 108);
-        ctx.quadraticCurveTo(96.5, 117, 103, 108);
-        ctx.stroke();
-        // 舌頭
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.moveTo(84, 112); ctx.quadraticCurveTo(90, 128, 96, 112);
-        ctx.fill(); ctx.stroke();
-        // 外框黑邊
-        ctx.strokeStyle = '#111111';
-        ctx.lineWidth = 8;
-        ctx.strokeRect(4, 4, 172, 172);
-        var link = document.getElementById('apple-touch-icon-link');
-        if (link) link.href = c.toDataURL('image/png');
-      } catch(e) {}
-    })();
-  </script>
+  <link id="apple-touch-icon-link" rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="180x180" href="apple-touch-icon.png?v=2" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -194,17 +134,8 @@
     <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
       <!-- 左側：紅帽貓咪吉祥物 + 雙色立體粗黑框標題 (源自圖片1「貓咪大戰爭」粉紅+金黃字體) -->
       <div class="flex items-center gap-2.5 min-w-0">
-        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-b from-yellow-300 to-amber-500 border-[3px] border-black shadow-[0_3px_0_#000] flex items-center justify-center shrink-0 overflow-hidden">
-          <!-- 內嵌 SVG 經典紅帽白貓頭 -->
-          <svg viewBox="0 0 100 100" class="w-10 h-10">
-            <polygon points="22,45 16,14 42,32" fill="#ffffff" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
-            <polygon points="78,45 84,14 58,32" fill="#ffffff" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
-            <circle cx="50" cy="60" r="32" fill="#ffffff" stroke="#111111" stroke-width="6"/>
-            <ellipse cx="33" cy="28" rx="14" ry="8" transform="rotate(-18 33 28)" fill="#ef4444" stroke="#111111" stroke-width="5"/>
-            <circle cx="38" cy="56" r="4.5" fill="#111111"/>
-            <circle cx="62" cy="56" r="4.5" fill="#111111"/>
-            <path d="M41,66 Q45.5,72 50,66 Q54.5,72 59,66" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round"/>
-          </svg>
+        <div class="relative w-11 h-11 rounded-2xl bg-[#118a28] border-[3px] border-black shadow-[0_3px_0_#000] flex items-center justify-center shrink-0 overflow-hidden">
+          <img id="header-app-photo" src="apple-touch-icon.png?v=2" alt="貓咪補完計劃" class="w-full h-full object-cover" />
         </div>
 
         <div class="min-w-0">
