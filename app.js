@@ -2,8 +2,8 @@
  * 貓咪補完計劃 App — 核心資料層與 Step 2 (Tab 1 圖鑑檢索 & Tab 4 資料備份)
  */
 
-const STORAGE_KEY = 'battlecats_tracker_v1';
-const STORAGE_META_KEY = 'battlecats_tracker_meta_v1';
+const STORAGE_KEY = 'battlecats_tracker_v2';
+const STORAGE_META_KEY = 'battlecats_tracker_meta_v2';
 const STORAGE_GAS_URL_KEY = 'battlecats_gas_url_v1';
 
 // 內建給使用者一鍵複製的 Google Apps Script 雙向同步後端程式碼
