@@ -97,43 +97,43 @@ function doPost(e) {
   }
 }`;
 
-// 稀有度順序與色票設定
+// 稀有度順序與色票設定（《貓咪大戰爭》漫畫粗黑框高飽和配色）
 const RARITY_ORDER = ['基本', 'EX', '稀有', '激稀有', '超激稀有', '傳說稀有'];
 const RARITY_STYLE = {
   '基本': {
-    badge: 'bg-slate-700 text-slate-200 border border-slate-600',
-    pillActive: 'bg-slate-200 text-slate-950 border-white shadow-sm',
-    pillInactive: 'bg-slate-900 text-slate-400 border-slate-800',
+    badge: 'bg-neutral-200 text-neutral-900 border-2 border-black font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn bg-neutral-800 text-white font-black',
+    pillInactive: 'bc-btn bg-white text-neutral-700 hover:bg-neutral-100',
     rank: 1
   },
   'EX': {
-    badge: 'bg-purple-950/90 text-purple-300 border border-purple-700/60',
-    pillActive: 'bg-purple-500 text-white border-purple-400 shadow-sm shadow-purple-500/30',
-    pillInactive: 'bg-slate-900 text-purple-300/70 border-slate-800',
+    badge: 'bg-purple-600 text-white border-2 border-black font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn bg-purple-600 text-white font-black',
+    pillInactive: 'bc-btn bg-purple-100 text-purple-900 hover:bg-purple-200',
     rank: 2
   },
   '稀有': {
-    badge: 'bg-sky-950/90 text-sky-300 border border-sky-700/60',
-    pillActive: 'bg-sky-500 text-slate-950 border-sky-300 shadow-sm shadow-sky-500/30',
-    pillInactive: 'bg-slate-900 text-sky-300/70 border-slate-800',
+    badge: 'bg-sky-500 text-black border-2 border-black font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn bg-sky-400 text-black font-black',
+    pillInactive: 'bc-btn bg-sky-100 text-sky-900 hover:bg-sky-200',
     rank: 3
   },
   '激稀有': {
-    badge: 'bg-amber-950/90 text-amber-300 border border-amber-700/60',
-    pillActive: 'bg-amber-400 text-slate-950 border-amber-300 shadow-sm shadow-amber-500/30',
-    pillInactive: 'bg-slate-900 text-amber-300/70 border-slate-800',
+    badge: 'bg-amber-400 text-black border-2 border-black font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn bg-amber-400 text-black font-black',
+    pillInactive: 'bc-btn bg-amber-100 text-amber-900 hover:bg-amber-200',
     rank: 4
   },
   '超激稀有': {
-    badge: 'bg-rose-950/90 text-rose-300 border border-rose-700/60',
-    pillActive: 'bg-rose-500 text-white border-rose-400 shadow-sm shadow-rose-500/30',
-    pillInactive: 'bg-slate-900 text-rose-300/70 border-slate-800',
+    badge: 'bg-rose-500 text-white border-2 border-black font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn bg-rose-500 text-white font-black',
+    pillInactive: 'bc-btn bg-rose-100 text-rose-900 hover:bg-rose-200',
     rank: 5
   },
   '傳說稀有': {
-    badge: 'badge-legend border border-fuchsia-400/50',
-    pillActive: 'badge-legend border-white shadow-md shadow-fuchsia-500/30',
-    pillInactive: 'bg-slate-900 text-fuchsia-300/80 border-slate-800',
+    badge: 'badge-legend font-black shadow-[0_2px_0_#000]',
+    pillActive: 'bc-btn badge-legend font-black',
+    pillInactive: 'bc-btn bg-fuchsia-100 text-fuchsia-900 hover:bg-fuchsia-200',
     rank: 6
   }
 };
@@ -162,12 +162,12 @@ const MATERIAL_CATEGORIES = [
     title: '🌺 一般貓薄荷（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
     desc: '雙週一至週五常駐進化關卡、貓薄荷挑戰',
     items: [
-      { baseKey: '紅薄', name: '紅色貓薄荷', short: '紅薄', colorCls: 'bg-rose-950/90 border-rose-600/60 text-rose-200', dot: '🔴' },
-      { baseKey: '綠薄', name: '綠色貓薄荷', short: '綠薄', colorCls: 'bg-emerald-950/90 border-emerald-600/60 text-emerald-200', dot: '🟢' },
-      { baseKey: '藍薄', name: '藍色貓薄荷', short: '藍薄', colorCls: 'bg-sky-950/90 border-sky-600/60 text-sky-200', dot: '🔵' },
-      { baseKey: '紫薄', name: '紫色貓薄荷', short: '紫薄', colorCls: 'bg-purple-950/90 border-purple-600/60 text-purple-200', dot: '🟣' },
-      { baseKey: '黃薄', name: '黃色貓薄荷', short: '黃薄', colorCls: 'bg-amber-950/90 border-amber-500/60 text-amber-200', dot: '🟡' },
-      { baseKey: '彩薄', name: '彩虹貓薄荷', short: '彩薄', colorCls: 'bg-fuchsia-950/90 border-fuchsia-500/70 text-fuchsia-100', dot: '🌈' }
+      { baseKey: '紅薄', name: '紅色貓薄荷', short: '紅薄', colorCls: 'bg-rose-500 text-white', dot: '🔴' },
+      { baseKey: '綠薄', name: '綠色貓薄荷', short: '綠薄', colorCls: 'bg-emerald-500 text-white', dot: '🟢' },
+      { baseKey: '藍薄', name: '藍色貓薄荷', short: '藍薄', colorCls: 'bg-sky-500 text-white', dot: '🔵' },
+      { baseKey: '紫薄', name: '紫色貓薄荷', short: '紫薄', colorCls: 'bg-purple-600 text-white', dot: '🟣' },
+      { baseKey: '黃薄', name: '黃色貓薄荷', short: '黃薄', colorCls: 'bg-yellow-400 text-black', dot: '🟡' },
+      { baseKey: '彩薄', name: '彩虹貓薄荷', short: '彩薄', colorCls: 'badge-legend text-white', dot: '🌈' }
     ]
   },
   {
@@ -175,12 +175,12 @@ const MATERIAL_CATEGORIES = [
     title: '🌱 一般貓薄荷種子（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
     desc: '初級／中級進化關卡或彩虹薄荷關卡掉落',
     items: [
-      { baseKey: '紅種', name: '紅貓薄荷種子', short: '紅種', colorCls: 'bg-rose-950/60 border-rose-800/60 text-rose-300', dot: '🌰' },
-      { baseKey: '綠種', name: '綠貓薄荷種子', short: '綠種', colorCls: 'bg-emerald-950/60 border-emerald-800/60 text-emerald-300', dot: '🌿' },
-      { baseKey: '藍種', name: '藍貓薄荷種子', short: '藍種', colorCls: 'bg-sky-950/60 border-sky-800/60 text-sky-300', dot: '💧' },
-      { baseKey: '紫種', name: '紫貓薄荷種子', short: '紫種', colorCls: 'bg-purple-950/60 border-purple-800/60 text-purple-300', dot: '🍇' },
-      { baseKey: '黃種', name: '黃貓薄荷種子', short: '黃種', colorCls: 'bg-amber-950/60 border-amber-800/60 text-amber-300', dot: '🌾' },
-      { baseKey: '彩種', name: '彩虹貓薄荷種子', short: '彩種', colorCls: 'bg-fuchsia-950/70 border-fuchsia-700/60 text-fuchsia-200', dot: '✨' }
+      { baseKey: '紅種', name: '紅貓薄荷種子', short: '紅種', colorCls: 'bg-rose-200 text-rose-950', dot: '🌰' },
+      { baseKey: '綠種', name: '綠貓薄荷種子', short: '綠種', colorCls: 'bg-emerald-200 text-emerald-950', dot: '🌿' },
+      { baseKey: '藍種', name: '藍貓薄荷種子', short: '藍種', colorCls: 'bg-sky-200 text-sky-950', dot: '💧' },
+      { baseKey: '紫種', name: '紫貓薄荷種子', short: '紫種', colorCls: 'bg-purple-200 text-purple-950', dot: '🍇' },
+      { baseKey: '黃種', name: '黃貓薄荷種子', short: '黃種', colorCls: 'bg-yellow-200 text-yellow-950', dot: '🌾' },
+      { baseKey: '彩種', name: '彩虹貓薄荷種子', short: '彩種', colorCls: 'bg-fuchsia-300 text-fuchsia-950', dot: '✨' }
     ]
   },
   {
@@ -188,12 +188,12 @@ const MATERIAL_CATEGORIES = [
     title: '🔮 特殊薄荷與種子（古代 / 惡魔 / 黃金）',
     desc: '成長的古代、成長的惡魔、黃金薄荷挑戰與貓咪神社',
     items: [
-      { baseKey: '古薄', name: '古代貓薄荷', short: '古薄', colorCls: 'bg-teal-950/90 border-teal-500/70 text-teal-200', dot: '🦖' },
-      { baseKey: '古種', name: '古代貓薄荷種子', short: '古種', colorCls: 'bg-teal-950/60 border-teal-700/60 text-teal-300', dot: '🦕' },
-      { baseKey: '惡薄', name: '惡魔貓薄荷', short: '惡薄', colorCls: 'bg-indigo-950/90 border-indigo-500/70 text-indigo-200', dot: '😈' },
-      { baseKey: '惡種', name: '惡魔貓薄荷種子', short: '惡種', colorCls: 'bg-indigo-950/60 border-indigo-700/60 text-indigo-300', dot: '👿' },
-      { baseKey: '金薄', name: '黃金貓薄荷', short: '金薄', colorCls: 'bg-yellow-950/90 border-yellow-500/80 text-yellow-200', dot: '🪙' },
-      { baseKey: '金種', name: '黃金貓薄荷種子', short: '金種', colorCls: 'bg-yellow-950/60 border-yellow-700/70 text-yellow-300', dot: '⚜️' }
+      { baseKey: '古薄', name: '古代貓薄荷', short: '古薄', colorCls: 'bg-teal-600 text-white', dot: '🦖' },
+      { baseKey: '古種', name: '古代貓薄荷種子', short: '古種', colorCls: 'bg-teal-200 text-teal-950', dot: '🦕' },
+      { baseKey: '惡薄', name: '惡魔貓薄荷', short: '惡薄', colorCls: 'bg-indigo-700 text-white', dot: '😈' },
+      { baseKey: '惡種', name: '惡魔貓薄荷種子', short: '惡種', colorCls: 'bg-indigo-200 text-indigo-950', dot: '👿' },
+      { baseKey: '金薄', name: '黃金貓薄荷', short: '金薄', colorCls: 'bg-amber-400 text-black', dot: '🪙' },
+      { baseKey: '金種', name: '黃金貓薄荷種子', short: '金種', colorCls: 'bg-amber-200 text-amber-950', dot: '⚜️' }
     ]
   },
   {
@@ -201,17 +201,17 @@ const MATERIAL_CATEGORIES = [
     title: '💎 獸石與獸結晶（紅 / 紫 / 翠 / 蒼 / 黃 / 彩）',
     desc: '發掘地圖、狩獵地圖（森林／沙漠／火山）與超獸討伐',
     items: [
-      { baseKey: '紅石', name: '紅獸石', short: '紅石', colorCls: 'bg-red-950/80 border-red-600/60 text-red-200', dot: '♦️' },
-      { baseKey: '紫石', name: '紫獸石', short: '紫石', colorCls: 'bg-violet-950/80 border-violet-600/60 text-violet-200', dot: '🟣' },
-      { baseKey: '翠石', name: '翠獸石', short: '翠石', colorCls: 'bg-emerald-950/80 border-emerald-600/60 text-emerald-200', dot: '🟢' },
-      { baseKey: '蒼石', name: '蒼獸石', short: '蒼石', colorCls: 'bg-blue-950/80 border-blue-600/60 text-blue-200', dot: '🔵' },
-      { baseKey: '黃石', name: '黃獸石', short: '黃石', colorCls: 'bg-amber-950/80 border-amber-500/60 text-amber-200', dot: '🟡' },
-      { baseKey: '彩石', name: '虹獸石', short: '彩石', colorCls: 'bg-pink-950/90 border-pink-500/80 text-pink-100', dot: '🌈' },
-      { baseKey: '紅晶', name: '紅獸結晶', short: '紅晶', colorCls: 'bg-red-900/80 border-red-400/80 text-red-100', dot: '💎' },
-      { baseKey: '紫晶', name: '紫獸結晶', short: '紫晶', colorCls: 'bg-violet-900/80 border-violet-400/80 text-violet-100', dot: '💎' },
-      { baseKey: '翠晶', name: '翠獸結晶', short: '翠晶', colorCls: 'bg-emerald-900/80 border-emerald-400/80 text-emerald-100', dot: '💎' },
-      { baseKey: '蒼晶', name: '蒼獸結晶', short: '蒼晶', colorCls: 'bg-blue-900/80 border-blue-400/80 text-blue-100', dot: '💎' },
-      { baseKey: '黃晶', name: '黃獸結晶', short: '黃晶', colorCls: 'bg-amber-900/80 border-amber-400/80 text-amber-100', dot: '💎' }
+      { baseKey: '紅石', name: '紅獸石', short: '紅石', colorCls: 'bg-red-500 text-white', dot: '♦️' },
+      { baseKey: '紫石', name: '紫獸石', short: '紫石', colorCls: 'bg-violet-600 text-white', dot: '🟣' },
+      { baseKey: '翠石', name: '翠獸石', short: '翠石', colorCls: 'bg-emerald-600 text-white', dot: '🟢' },
+      { baseKey: '蒼石', name: '蒼獸石', short: '蒼石', colorCls: 'bg-blue-600 text-white', dot: '🔵' },
+      { baseKey: '黃石', name: '黃獸石', short: '黃石', colorCls: 'bg-yellow-400 text-black', dot: '🟡' },
+      { baseKey: '彩石', name: '虹獸石', short: '彩石', colorCls: 'badge-legend text-white', dot: '🌈' },
+      { baseKey: '紅晶', name: '紅獸結晶', short: '紅晶', colorCls: 'bg-red-700 text-yellow-200', dot: '💎' },
+      { baseKey: '紫晶', name: '紫獸結晶', short: '紫晶', colorCls: 'bg-violet-800 text-yellow-200', dot: '💎' },
+      { baseKey: '翠晶', name: '翠獸結晶', short: '翠晶', colorCls: 'bg-emerald-800 text-yellow-200', dot: '💎' },
+      { baseKey: '蒼晶', name: '蒼獸結晶', short: '蒼晶', colorCls: 'bg-blue-800 text-yellow-200', dot: '💎' },
+      { baseKey: '黃晶', name: '黃獸結晶', short: '黃晶', colorCls: 'bg-amber-600 text-white', dot: '💎' }
     ]
   }
 ];
@@ -593,37 +593,37 @@ function updateCloudStatusUI(status, message) {
 
   if (dotEl && textEl) {
     if (status === 'syncing') {
-      dotEl.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
+      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-amber-400 border border-black animate-ping';
       textEl.textContent = '同步中...';
-      textEl.className = 'font-bold text-[11px] text-amber-300 leading-tight';
+      textEl.className = 'font-black text-[11px] text-red-700 leading-tight';
     } else if (status === 'synced') {
-      dotEl.className = 'w-2 h-2 rounded-full bg-emerald-400';
-      textEl.textContent = '已同步';
-      textEl.className = 'font-bold text-[11px] text-emerald-300 leading-tight';
+      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-black';
+      textEl.textContent = '已連線';
+      textEl.className = 'font-black text-[11px] text-emerald-950 leading-tight';
     } else if (status === 'error') {
-      dotEl.className = 'w-2 h-2 rounded-full bg-rose-500';
+      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-600 border border-black';
       textEl.textContent = '同步失敗';
-      textEl.className = 'font-bold text-[11px] text-rose-400 leading-tight';
+      textEl.className = 'font-black text-[11px] text-red-700 leading-tight';
     } else {
-      dotEl.className = 'w-2 h-2 rounded-full bg-slate-500';
+      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-neutral-400 border border-black';
       textEl.textContent = '未綁定';
-      textEl.className = 'font-bold text-[11px] text-slate-300 leading-tight';
+      textEl.className = 'font-black text-[11px] text-black leading-tight';
     }
   }
 
   if (badgeEl) {
     if (status === 'synced') {
       badgeEl.textContent = '☁️ 雲端連線正常';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-mono shrink-0';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-emerald-400 border-2 border-black text-black text-xs font-mono font-black shrink-0';
     } else if (status === 'syncing') {
       badgeEl.textContent = '⏳ 雲端同步中...';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs font-mono shrink-0';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-yellow-300 border-2 border-black text-black text-xs font-mono font-black shrink-0';
     } else if (status === 'error') {
       badgeEl.textContent = '⚠️ 連線異常';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs font-mono shrink-0';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-red-500 border-2 border-black text-white text-xs font-mono font-black shrink-0';
     } else {
       badgeEl.textContent = '未連線';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono shrink-0';
+      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-neutral-900 border-2 border-black text-yellow-300 text-xs font-mono font-black shrink-0';
     }
   }
 
@@ -1019,14 +1019,14 @@ function updateGlobalCounters() {
   document.getElementById('count-status-tf').textContent = pendingTFCount;
   document.getElementById('count-status-uf').textContent = pendingUFCount;
 
-  // 更新快篩按鈕高亮樣式
+  // 更新快篩按鈕高亮樣式（仿圖片2戰鬥介面黃色亮起 vs 白底黑框）
   document.querySelectorAll('#status-filter-group .status-pill').forEach(btn => {
     const st = btn.getAttribute('data-status');
     const active = st === state.filters.status;
-    btn.className = `status-pill btn-touch rounded-xl text-xs font-bold px-2 py-2 border transition flex flex-col items-center justify-center ${
+    btn.className = `status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center ${
       active
-        ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-lg shadow-amber-500/20'
-        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
+        ? 'bg-gradient-to-b from-yellow-300 to-amber-400 text-black ring-2 ring-orange-500'
+        : 'bg-white text-neutral-800 hover:bg-amber-50'
     }`;
   });
 
@@ -1115,18 +1115,18 @@ function formatMaterialPreview(cat) {
   const pills = [];
   if (hasTFOpen(cat) && !cat.tfDone) {
     for (const [k, v] of Object.entries(cat.matsTF)) {
-      pills.push(`<span class="px-1.5 py-0.5 rounded bg-emerald-950/90 border border-emerald-700/50 text-emerald-300 text-[11px] font-mono">${k.slice(1)}×${v}</span>`);
+      pills.push(`<span class="px-1.5 py-0.5 rounded-md bg-emerald-200 border-[1.5px] border-black text-emerald-950 text-[11px] font-mono font-black">${k.slice(1)}×${v}</span>`);
     }
   }
   if (hasUFOpen(cat) && !cat.ufDone) {
     for (const [k, v] of Object.entries(cat.matsUF)) {
-      pills.push(`<span class="px-1.5 py-0.5 rounded bg-sky-950/90 border border-sky-700/50 text-sky-300 text-[11px] font-mono">${k.slice(1)}×${v}</span>`);
+      pills.push(`<span class="px-1.5 py-0.5 rounded-md bg-sky-200 border-[1.5px] border-black text-sky-950 text-[11px] font-mono font-black">${k.slice(1)}×${v}</span>`);
     }
   }
   if (pills.length === 0) return '';
   return `
-    <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center gap-1.5 flex-wrap">
-      <span class="text-[11px] text-amber-400 font-bold">🧪 尚缺進化素材：</span>
+    <div class="mt-2.5 pt-2 border-t-2 border-dashed border-neutral-300 flex items-center gap-1.5 flex-wrap">
+      <span class="text-[11px] text-red-600 font-black">🧪 尚缺進化素材：</span>
       ${pills.join('')}
     </div>
   `;
@@ -1137,56 +1137,56 @@ function renderCatCardHTML(cat) {
   const tfOpen = hasTFOpen(cat);
   const ufOpen = hasUFOpen(cat);
 
-  // 開放進化階段標籤色
+  // 開放進化階段標籤色 (高對比黑框徽章)
   const maxEvoBadge =
     cat.maxEvo === '四階'
-      ? 'bg-sky-500/15 text-sky-300 border border-sky-500/40'
+      ? 'bg-sky-300 text-black border-2 border-black font-black shadow-[0_2px_0_#000]'
       : cat.maxEvo === '三階'
-      ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/40'
-      : 'bg-slate-800 text-slate-400 border border-slate-700';
+      ? 'bg-emerald-300 text-black border-2 border-black font-black shadow-[0_2px_0_#000]'
+      : 'bg-neutral-200 text-neutral-700 border-2 border-black font-bold';
 
   // 轉蛋池多標籤渲染
   const poolBadges = cat.pools
-    .map(p => `<span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">🏷️ ${p}</span>`)
+    .map(p => `<span class="px-2 py-0.5 rounded-lg bg-amber-100 border-[1.5px] border-black text-[11px] font-extrabold text-neutral-900">🏷️ ${p}</span>`)
     .join('');
 
-  // 四大狀態切換按鈕樣式
+  // 四大狀態切換按鈕樣式 (仿圖片2底部出陣卡槽：啟用時金黃/亮綠/冰藍亮起，未啟用時灰白底黑框)
   const btnObtainedCls = cat.obtained
-    ? 'bg-amber-500/20 border-amber-500 text-amber-300 font-extrabold shadow-inner'
-    : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700';
+    ? 'bc-btn bg-gradient-to-b from-yellow-300 to-amber-400 text-black font-black'
+    : 'bc-btn bg-neutral-100 text-neutral-500 font-bold hover:bg-neutral-200';
 
   const btnTFCls = !tfOpen
-    ? 'bg-slate-950/40 border-slate-900 text-slate-700 cursor-not-allowed opacity-50'
+    ? 'border-2 border-neutral-300 bg-neutral-100 text-neutral-400 cursor-not-allowed opacity-60 font-bold'
     : cat.tfDone
-    ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300 font-extrabold shadow-inner'
-    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-emerald-700';
+    ? 'bc-btn bg-gradient-to-b from-emerald-300 to-emerald-500 text-black font-black'
+    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-emerald-50';
 
   const btnUFCls = !ufOpen
-    ? 'bg-slate-950/40 border-slate-900 text-slate-700 cursor-not-allowed opacity-50'
+    ? 'border-2 border-neutral-300 bg-neutral-100 text-neutral-400 cursor-not-allowed opacity-60 font-bold'
     : cat.ufDone
-    ? 'bg-sky-500/20 border-sky-400 text-sky-300 font-extrabold shadow-inner'
-    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-sky-700';
+    ? 'bc-btn bg-gradient-to-b from-sky-300 to-sky-500 text-black font-black'
+    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-sky-50';
 
   const btnInstinctCls = cat.instinct
-    ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300 font-extrabold shadow-inner'
-    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-fuchsia-800';
+    ? 'bc-btn bg-gradient-to-b from-pink-400 to-fuchsia-500 text-white font-black'
+    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-pink-50';
 
   return `
     <article
       data-cat-card="${cat.id}"
-      class="bg-slate-900/95 border ${!cat.obtained ? 'border-rose-900/50' : 'border-slate-800'} rounded-2xl p-3 shadow-md transition"
+      class="${!cat.obtained ? 'bc-card-unobtained' : 'bc-card'} rounded-2xl p-3 transition"
     >
       <!-- 卡片頂部：編號、名稱、稀有度、最高開放階數 -->
       <div class="flex items-start justify-between gap-2">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="px-2 py-0.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs font-extrabold text-amber-400">
+          <span class="px-2 py-0.5 rounded-lg bg-neutral-900 border-2 border-black font-mono text-xs font-black text-yellow-300 shadow-[0_2px_0_#000]">
             #${cat.id}
           </span>
-          <h3 class="text-base font-extrabold text-white tracking-tight">${cat.name}</h3>
+          <h3 class="text-base sm:text-lg font-black text-neutral-900 tracking-tight">${cat.name}</h3>
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
-          <span class="px-2 py-0.5 rounded-lg text-[11px] font-bold ${rarityStyle}">${cat.rarity}</span>
-          <span class="px-2 py-0.5 rounded-lg text-[11px] font-bold ${maxEvoBadge}">最高${cat.maxEvo}</span>
+          <span class="px-2 py-0.5 rounded-lg text-[11px] ${rarityStyle}">${cat.rarity}</span>
+          <span class="px-2 py-0.5 rounded-lg text-[11px] ${maxEvoBadge}">最高${cat.maxEvo}</span>
         </div>
       </div>
 
@@ -1202,9 +1202,9 @@ function renderCatCardHTML(cat) {
           data-action="toggle"
           data-id="${cat.id}"
           data-field="obtained"
-          class="btn-touch rounded-xl border text-xs flex items-center justify-center gap-1 transition ${btnObtainedCls}"
+          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnObtainedCls}"
         >
-          <span>${cat.obtained ? '✓' : '○'}</span>
+          <span>${cat.obtained ? '🐾' : '○'}</span>
           <span>已獲得</span>
         </button>
 
@@ -1214,9 +1214,9 @@ function renderCatCardHTML(cat) {
           data-id="${cat.id}"
           data-field="tfDone"
           ${!tfOpen ? 'disabled' : ''}
-          class="btn-touch rounded-xl border text-xs flex items-center justify-center gap-1 transition ${btnTFCls}"
+          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnTFCls}"
         >
-          <span>${!tfOpen ? '—' : cat.tfDone ? '✓' : '⏳'}</span>
+          <span>${!tfOpen ? '—' : cat.tfDone ? '★' : '⏳'}</span>
           <span>三階</span>
         </button>
 
@@ -1226,9 +1226,9 @@ function renderCatCardHTML(cat) {
           data-id="${cat.id}"
           data-field="ufDone"
           ${!ufOpen ? 'disabled' : ''}
-          class="btn-touch rounded-xl border text-xs flex items-center justify-center gap-1 transition ${btnUFCls}"
+          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnUFCls}"
         >
-          <span>${!ufOpen ? '—' : cat.ufDone ? '✓' : '⏳'}</span>
+          <span>${!ufOpen ? '—' : cat.ufDone ? '👑' : '⏳'}</span>
           <span>四階</span>
         </button>
 
@@ -1237,9 +1237,9 @@ function renderCatCardHTML(cat) {
           data-action="toggle"
           data-id="${cat.id}"
           data-field="instinct"
-          class="btn-touch rounded-xl border text-xs flex items-center justify-center gap-1 transition ${btnInstinctCls}"
+          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnInstinctCls}"
         >
-          <span>${cat.instinct ? '✓' : '○'}</span>
+          <span>${cat.instinct ? '🔥' : '○'}</span>
           <span>本能</span>
         </button>
       </div>
@@ -1261,10 +1261,10 @@ function renderCatList(resetLimit = true) {
 
   if (filtered.length === 0) {
     listEl.innerHTML = `
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center space-y-2">
-        <div class="text-3xl">😿</div>
-        <div class="text-sm font-bold text-slate-300">找不到符合篩選條件的貓咪</div>
-        <p class="text-xs text-slate-500">試著清除搜尋字詞或切換上方的稀有度／轉蛋池篩選器。</p>
+      <div class="bc-panel rounded-2xl p-8 text-center space-y-2">
+        <div class="text-4xl">😿</div>
+        <div class="text-base font-black text-neutral-900">找不到符合篩選條件的貓咪</div>
+        <p class="text-xs font-bold text-neutral-600">試著清除搜尋字詞或切換上方的稀有度／轉蛋池篩選器。</p>
       </div>
     `;
     sentinelEl.classList.add('hidden');
@@ -1277,7 +1277,7 @@ function renderCatList(resetLimit = true) {
   if (filtered.length > state.renderLimit) {
     sentinelEl.classList.remove('hidden');
     const remain = filtered.length - state.renderLimit;
-    document.getElementById('load-more-btn').textContent = `載入更多貓咪（還有 ${remain} 隻）...`;
+    document.getElementById('load-more-btn').textContent = `🐾 載入更多貓咪（還有 ${remain} 隻）...`;
   } else {
     sentinelEl.classList.add('hidden');
   }
@@ -1366,8 +1366,8 @@ function renderMaterialDashboard() {
   document.querySelectorAll('#mat-stage-scope-group .mat-scope-btn').forEach(btn => {
     const sc = btn.getAttribute('data-scope');
     const active = sc === state.matDashboard.stageScope;
-    btn.className = `mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-bold transition ${
-      active ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'
+    btn.className = `mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-black transition ${
+      active ? 'bg-yellow-400 text-black shadow' : 'text-neutral-300 hover:text-white'
     }`;
   });
 
@@ -1381,12 +1381,12 @@ function renderMaterialDashboard() {
 
     if (visibleItems.length === 0) {
       return `
-        <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-3.5 flex items-center justify-between">
+        <div class="bc-panel rounded-2xl p-3.5 flex items-center justify-between">
           <div>
-            <h3 class="text-sm font-bold text-slate-300">${group.title}</h3>
-            <p class="text-[11px] text-slate-500">${group.desc}</p>
+            <h3 class="text-sm font-black text-neutral-900">${group.title}</h3>
+            <p class="text-[11px] font-bold text-neutral-600">${group.desc}</p>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-400 border-2 border-black text-black text-xs font-black">
             ✓ 全數不缺 (0)
           </span>
         </div>
@@ -1403,19 +1403,19 @@ function renderMaterialDashboard() {
         <button
           type="button"
           data-mat-key="${st.baseKey}"
-          class="mat-card-btn text-left p-2.5 rounded-xl border transition flex flex-col justify-between ${
+          class="mat-card-btn bc-btn text-left p-2.5 rounded-xl flex flex-col justify-between ${
             isZero
-              ? 'bg-slate-950/50 border-slate-800/60 text-slate-600 opacity-60'
-              : `${st.colorCls} hover:scale-[1.01] active:scale-[0.99] shadow-md`
+              ? 'bg-neutral-200 text-neutral-500 opacity-65'
+              : `${st.colorCls}`
           }"
         >
           <div class="flex items-center justify-between gap-1 w-full">
-            <span class="text-xs font-extrabold flex items-center gap-1 truncate">
+            <span class="text-xs font-black flex items-center gap-1 truncate">
               <span>${st.dot}</span>
               <span>${st.name}</span>
             </span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-black/30 font-mono shrink-0">
-              ${st.usages.length}隻需用
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-black/25 font-mono font-bold shrink-0">
+              ${st.usages.length}隻
             </span>
           </div>
 
@@ -1423,7 +1423,7 @@ function renderMaterialDashboard() {
             <div class="text-2xl font-black font-mono tracking-tight">
               ×${st.total}
             </div>
-            <div class="text-[10px] opacity-85 font-mono">
+            <div class="text-[10px] font-mono font-black opacity-90">
               ${stageBreakdown.join(' / ') || '不缺'}
             </div>
           </div>
@@ -1432,13 +1432,13 @@ function renderMaterialDashboard() {
     }).join('');
 
     return `
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-2.5 shadow-lg">
+      <div class="bc-panel rounded-2xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between gap-2">
           <div>
-            <h3 class="text-sm font-extrabold text-white">${group.title}</h3>
-            <p class="text-[11px] text-slate-400">${group.desc}</p>
+            <h3 class="text-sm font-black text-neutral-900">${group.title}</h3>
+            <p class="text-[11px] font-bold text-neutral-600">${group.desc}</p>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-amber-400 text-xs font-mono font-bold shrink-0">
+          <span class="px-2.5 py-1 rounded-lg bg-neutral-900 border-2 border-black text-yellow-300 text-xs font-mono font-black shrink-0 shadow-[0_2px_0_#000]">
             小計 ${groupSum} 顆
           </span>
         </div>
@@ -1466,11 +1466,11 @@ function openMaterialReverseModal(baseKey) {
 
   badgeEl.textContent = st.dot;
   titleEl.textContent = `${st.name}（尚缺 ×${st.total}）`;
-  subEl.textContent = `共 ${st.usages.length} 筆進化需求（點擊右側按鈕可直接打卡完成進化並扣除素材）`;
+  subEl.textContent = `共 ${st.usages.length} 筆進化需求（點擊右側按鈕可直接完成進化並扣除素材）`;
 
   if (st.usages.length === 0) {
     listEl.innerHTML = `
-      <div class="p-6 text-center text-slate-400 text-xs">
+      <div class="p-6 text-center text-neutral-700 font-black text-sm">
         🎉 太棒了！目前沒有任何待進化的貓咪需要【${st.name}】。
       </div>
     `;
@@ -1479,16 +1479,16 @@ function openMaterialReverseModal(baseKey) {
       const rarityBadge = RARITY_STYLE[cat.rarity]?.badge || '';
       const field = stage === '四階' ? 'ufDone' : 'tfDone';
       return `
-        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+        <div class="bc-card rounded-xl p-3 flex items-center justify-between gap-2">
           <div class="space-y-1 min-w-0">
             <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="font-mono text-xs font-bold text-amber-400">#${cat.id}</span>
-              <span class="text-sm font-extrabold text-white truncate">${cat.name}</span>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${rarityBadge}">${cat.rarity}</span>
-              ${!cat.obtained ? '<span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700/50 text-[10px] font-bold">未獲得</span>' : ''}
+              <span class="px-1.5 py-0.5 rounded bg-neutral-900 text-yellow-300 font-mono text-xs font-black">#${cat.id}</span>
+              <span class="text-sm font-black text-neutral-900 truncate">${cat.name}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] ${rarityBadge}">${cat.rarity}</span>
+              ${!cat.obtained ? '<span class="px-1.5 py-0.5 rounded bg-red-600 text-white border border-black text-[10px] font-black">未獲得</span>' : ''}
             </div>
-            <div class="text-xs text-slate-400 flex items-center gap-2">
-              <span>升${stage}需求：<strong class="text-amber-300 font-mono">${st.name} ×${amount}</strong></span>
+            <div class="text-xs font-bold text-neutral-700 flex items-center gap-2">
+              <span>升${stage}需求：<strong class="text-red-600 font-mono font-black">${st.name} ×${amount}</strong></span>
             </div>
           </div>
 
@@ -1496,7 +1496,7 @@ function openMaterialReverseModal(baseKey) {
             type="button"
             data-modal-toggle-id="${cat.id}"
             data-modal-toggle-field="${field}"
-            class="btn-touch px-3 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 text-emerald-300 text-xs font-extrabold shrink-0 transition"
+            class="bc-btn btn-touch px-3 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black text-xs font-black shrink-0"
           >
             ✓ 完成${stage}
           </button>
@@ -1564,10 +1564,10 @@ function renderGachaDashboard() {
   document.querySelectorAll('#gacha-group-pills .gacha-grp-pill').forEach(btn => {
     const gk = btn.getAttribute('data-gacha-group');
     const active = gk === state.gachaAnalyzer.groupKey;
-    btn.className = `gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border shrink-0 transition ${
+    btn.className = `gacha-grp-pill bc-btn px-3 py-1.5 rounded-xl text-xs font-black shrink-0 ${
       active
-        ? 'bg-amber-500 text-slate-950 border-amber-400 shadow'
-        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
+        ? 'bg-yellow-400 text-black'
+        : 'bg-white text-neutral-800 hover:bg-amber-50'
     }`;
   });
 
@@ -1597,9 +1597,9 @@ function renderGachaDashboard() {
 
   if (filteredPools.length === 0) {
     container.innerHTML = `
-      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-8 text-center space-y-2">
-        <div class="text-3xl">🎉</div>
-        <div class="text-sm font-bold text-slate-200">此分類下的轉蛋池已 100% 全部集滿！</div>
+      <div class="bc-panel rounded-2xl p-8 text-center space-y-2">
+        <div class="text-4xl">🎉</div>
+        <div class="text-base font-black text-neutral-900">此分類下的轉蛋池已 100% 全部集滿！</div>
       </div>
     `;
     return;
@@ -1618,21 +1618,21 @@ function renderGachaDashboard() {
     // 抽卡建議標籤
     let adviceBadge = '';
     if (isComplete) {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[11px] font-bold">🏆 已全齊制霸</span>`;
+      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-emerald-400 border-2 border-black text-black text-[11px] font-black shadow-[0_2px_0_#000]">🏆 已全齊制霸</span>`;
     } else if (p.newRate >= 40 || p.missingCount >= 4) {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-rose-500/20 border border-rose-500/50 text-rose-300 text-[11px] font-extrabold">🔥 必中11連極推 (New ${p.newRate.toFixed(1)}%)</span>`;
+      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-red-600 border-2 border-black text-yellow-300 text-[11px] font-black shadow-[0_2px_0_#000]">🔥 必中11連極推 (New ${p.newRate.toFixed(1)}%)</span>`;
     } else {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-300 text-[11px] font-bold">🎯 缺 ${p.missingCount} 隻 (New ${p.newRate.toFixed(1)}%)</span>`;
+      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-yellow-300 border-2 border-black text-black text-[11px] font-black shadow-[0_2px_0_#000]">🎯 缺 ${p.missingCount} 隻 (New ${p.newRate.toFixed(1)}%)</span>`;
     }
 
     // 缺漏貓咪名單膠囊（點擊可直接跳轉圖鑑或直接打卡獲得）
     const missingBadgesHTML = isComplete
-      ? `<div class="text-xs text-emerald-400/90 font-semibold">✨ 此池全數貓咪皆已入手！</div>`
+      ? `<div class="text-xs text-emerald-700 font-black">✨ 此池全數貓咪皆已入手！</div>`
       : `
-        <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
-          <div class="text-[11px] text-slate-400 flex items-center justify-between">
-            <span>缺漏貓咪名單（點擊可直接標記為「已獲得 ✓」）：</span>
-            <button type="button" data-jump-pool="${p.poolName}" class="text-amber-400 hover:underline font-bold">
+        <div class="pt-2.5 border-t-2 border-dashed border-neutral-300 space-y-2">
+          <div class="text-[11px] font-bold text-neutral-700 flex items-center justify-between flex-wrap gap-1">
+            <span>缺漏貓咪名單（點擊可直接標記為「已獲得 🐾」）：</span>
+            <button type="button" data-jump-pool="${p.poolName}" class="text-red-600 hover:underline font-black">
               於圖鑑檢視此池 →
             </button>
           </div>
@@ -1643,12 +1643,12 @@ function renderGachaDashboard() {
                 <button
                   type="button"
                   data-quick-obtain-id="${mc.id}"
-                  class="px-2.5 py-1.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-rose-500/40 text-xs flex items-center gap-1.5 transition"
+                  class="bc-btn px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-yellow-200 text-xs flex items-center gap-1.5"
                 >
-                  <span class="font-mono text-[11px] text-amber-400 font-bold">#${mc.id}</span>
-                  <span class="font-bold text-white">${mc.name}</span>
+                  <span class="px-1.5 py-0.2 rounded bg-neutral-900 font-mono text-[11px] text-yellow-300 font-black">#${mc.id}</span>
+                  <span class="font-black text-neutral-900">${mc.name}</span>
                   <span class="px-1.5 py-0.2 rounded text-[10px] ${rBadge}">${mc.rarity}</span>
-                  <span class="text-emerald-400 font-bold text-[11px] ml-0.5">+入手</span>
+                  <span class="text-emerald-700 font-black text-[11px] ml-0.5">+入手</span>
                 </button>
               `;
             }).join('')}
@@ -1657,23 +1657,23 @@ function renderGachaDashboard() {
       `;
 
     return `
-      <article class="bg-slate-900/95 border ${isComplete ? 'border-slate-800/80' : 'border-amber-500/30'} rounded-2xl p-3.5 space-y-2.5 shadow-md">
+      <article class="bc-card rounded-2xl p-3.5 space-y-2.5">
         <div class="flex items-start justify-between gap-2">
           <div>
-            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${p.groupLabel}</div>
-            <h3 class="text-base font-extrabold text-white mt-0.5">${p.poolName}</h3>
+            <div class="text-[11px] font-black text-orange-700 uppercase tracking-wider">${p.groupLabel}</div>
+            <h3 class="text-base sm:text-lg font-black text-neutral-900 mt-0.5">${p.poolName}</h3>
           </div>
           <div class="flex flex-col items-end gap-1 shrink-0">
             ${adviceBadge}
-            <span class="text-xs font-mono text-slate-300">
-              已獲 <strong class="text-white">${p.obtainedCount}</strong> / ${p.total} 隻 (${p.completionRate.toFixed(1)}%)
+            <span class="text-xs font-mono font-black text-neutral-800">
+              已獲 <strong class="text-red-600">${p.obtainedCount}</strong> / ${p.total} 隻 (${p.completionRate.toFixed(1)}%)
             </span>
           </div>
         </div>
 
-        <!-- 進度條 -->
-        <div class="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
-          <div class="h-full ${barColor} transition-all duration-300" style="width: ${p.completionRate.toFixed(1)}%"></div>
+        <!-- 進度條 (粗黑邊遊戲血條風) -->
+        <div class="w-full h-3.5 bg-neutral-900 rounded-full overflow-hidden border-2 border-black p-0.5">
+          <div class="h-full rounded-full ${barColor} transition-all duration-300" style="width: ${p.completionRate.toFixed(1)}%"></div>
         </div>
 
         ${missingBadgesHTML}
@@ -1819,8 +1819,9 @@ function switchTab(tabName) {
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
     const t = btn.getAttribute('data-tab');
     const isActive = t === tabName;
-    btn.classList.toggle('text-amber-400', isActive);
-    btn.classList.toggle('text-slate-400', !isActive);
+    btn.className = `nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl ${
+      isActive ? 'bg-yellow-300 text-black' : 'bg-neutral-900 text-neutral-300 hover:bg-neutral-800'
+    }`;
   });
 
   if (tabName === 'materials') renderMaterialDashboard();

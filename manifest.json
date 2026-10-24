@@ -4,12 +4,12 @@
   "description": "《貓咪大戰爭》770隻全圖鑑檢索、三階/四階進化素材缺口結算與轉蛋池補完率分析工具",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090d16",
-  "theme_color": "#090d16",
+  "background_color": "#f59e0b",
+  "theme_color": "#f59e0b",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230f172a'/><circle cx='90' cy='96' r='54' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6'/><polygon points='46,66 38,24 74,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><polygon points='134,66 142,24 106,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><circle cx='70' cy='90' r='6' fill='%230f172a'/><circle cx='110' cy='90' r='6' fill='%230f172a'/><path d='M82,104 Q90,112 98,104' fill='none' stroke='%230f172a' stroke-width='5' stroke-linecap='round'/><path d='M65,126 L115,126' stroke='%23f59e0b' stroke-width='6' stroke-linecap='round'/></svg>",
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23fbbf24' stroke='%23111111' stroke-width='8'/><circle cx='90' cy='102' r='54' fill='%23ffffff' stroke='%23111111' stroke-width='8'/><polygon points='46,72 38,26 76,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><polygon points='134,72 142,26 104,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><ellipse cx='62' cy='52' rx='18' ry='11' transform='rotate(-15 62 52)' fill='%23ef4444' stroke='%23111111' stroke-width='6'/><circle cx='70' cy='96' r='6.5' fill='%23111111'/><circle cx='110' cy='96' r='6.5' fill='%23111111'/><path d='M78,110 Q84,118 90,110 Q96,118 102,110' fill='none' stroke='%23111111' stroke-width='6' stroke-linecap='round'/></svg>",
       "sizes": "180x180 512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"

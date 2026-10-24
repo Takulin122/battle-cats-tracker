@@ -1,57 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh-TW" class="dark">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="貓咪補完計劃" />
-  <meta name="theme-color" content="#090d16" />
+  <meta name="theme-color" content="#f59e0b" />
   <title>貓咪補完計劃 — 貓咪大戰爭個人圖鑑與養成追蹤</title>
 
-  <!-- 內嵌高解析度 Apple Touch Icon (動態 Canvas PNG 產生器 + SVG 備援) -->
+  <!-- 內嵌高解析度 Apple Touch Icon (動態 Canvas PNG 產生器：金橘放射芒光 + 紅帽白貓) -->
   <link rel="manifest" href="manifest.json" />
-  <link id="apple-touch-icon-link" rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230f172a'/><circle cx='90' cy='96' r='54' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6'/><polygon points='46,66 38,24 74,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><polygon points='134,66 142,24 106,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><circle cx='70' cy='90' r='6' fill='%230f172a'/><circle cx='110' cy='90' r='6' fill='%230f172a'/><path d='M82,104 Q90,112 98,104' fill='none' stroke='%230f172a' stroke-width='5' stroke-linecap='round'/><path d='M65,126 L115,126' stroke='%23f59e0b' stroke-width='6' stroke-linecap='round'/></svg>" />
+  <link id="apple-touch-icon-link" rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%23fbbf24' stroke='%23111111' stroke-width='8'/><circle cx='90' cy='102' r='54' fill='%23ffffff' stroke='%23111111' stroke-width='8'/><polygon points='46,72 38,26 76,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><polygon points='134,72 142,26 104,52' fill='%23ffffff' stroke='%23111111' stroke-width='8' stroke-linejoin='round'/><circle cx='70' cy='96' r='6.5' fill='%23111111'/><circle cx='110' cy='96' r='6.5' fill='%23111111'/><path d='M78,110 Q84,118 90,110 Q96,118 102,110' fill='none' stroke='%23111111' stroke-width='6' stroke-linecap='round'/></svg>" />
   <script>
-    // 自動繪製 180x180 PNG Data URL 給 iOS Safari「加入主畫面」使用，確保主畫面圖示100%清晰不黑底
+    // 自動繪製《貓咪大戰爭》經典「金橘放射芒光＋粗黑邊紅帽貓咪」180x180 PNG 供 iOS 加入主畫面使用
     (function(){
       try {
         var c = document.createElement('canvas');
         c.width = 180; c.height = 180;
         var ctx = c.getContext('2d');
-        // 深色背景
-        ctx.fillStyle = '#0f172a';
+        // 1. 金黃/亮橘放射芒光背景 (源自圖片3)
+        ctx.fillStyle = '#fbbf24';
         ctx.fillRect(0, 0, 180, 180);
-        // 琥珀金外框裝飾
-        ctx.strokeStyle = '#f59e0b';
-        ctx.lineWidth = 6;
-        ctx.strokeRect(9, 9, 162, 162);
-        // 貓耳
+        ctx.fillStyle = '#f97316';
+        for (var i = 0; i < 16; i += 2) {
+          var a1 = (i * Math.PI) / 8;
+          var a2 = ((i + 1) * Math.PI) / 8;
+          ctx.beginPath();
+          ctx.moveTo(90, 105);
+          ctx.arc(90, 105, 160, a1, a2);
+          ctx.closePath();
+          ctx.fill();
+        }
+        // 2. 貓耳 (白底粗黑框)
         ctx.fillStyle = '#ffffff';
-        ctx.strokeStyle = '#f59e0b';
-        ctx.lineWidth = 6;
+        ctx.strokeStyle = '#111111';
+        ctx.lineWidth = 7;
         ctx.lineJoin = 'round';
-        ctx.beginPath(); ctx.moveTo(46, 68); ctx.lineTo(38, 26); ctx.lineTo(76, 50); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(134, 68); ctx.lineTo(142, 26); ctx.lineTo(104, 50); ctx.closePath(); ctx.fill(); ctx.stroke();
-        // 貓臉圓形
-        ctx.beginPath(); ctx.arc(90, 98, 52, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-        // 眼睛
-        ctx.fillStyle = '#0f172a';
-        ctx.beginPath(); ctx.arc(70, 92, 6, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.arc(110, 92, 6, 0, Math.PI * 2); ctx.fill();
-        // 貓嘴 (ω)
-        ctx.strokeStyle = '#0f172a';
-        ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(44, 72); ctx.lineTo(36, 26); ctx.lineTo(76, 52); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(136, 72); ctx.lineTo(144, 26); ctx.lineTo(104, 52); ctx.closePath(); ctx.fill(); ctx.stroke();
+        // 3. 貓臉圓形
+        ctx.beginPath(); ctx.arc(90, 102, 54, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        // 4. 經典 1P 紅色貝雷帽 (源自圖片1)
+        ctx.save();
+        ctx.translate(62, 50);
+        ctx.rotate(-0.22);
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath(); ctx.ellipse(0, 0, 22, 12, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.restore();
+        // 5. 眼睛與經典貓嘴 (ω)
+        ctx.fillStyle = '#111111';
+        ctx.beginPath(); ctx.arc(70, 94, 6.5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(110, 94, 6.5, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#111111';
+        ctx.lineWidth = 5.5;
         ctx.lineCap = 'round';
         ctx.beginPath();
-        ctx.moveTo(78, 106); ctx.quadraticCurveTo(84, 114, 90, 106);
-        ctx.quadraticCurveTo(96, 114, 102, 106);
+        ctx.moveTo(77, 108); ctx.quadraticCurveTo(83.5, 117, 90, 108);
+        ctx.quadraticCurveTo(96.5, 117, 103, 108);
         ctx.stroke();
-        // 金色能量條
-        ctx.fillStyle = '#f59e0b';
-        ctx.font = 'bold 20px -apple-system, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('貓咪補完', 90, 164);
+        // 舌頭
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.moveTo(84, 112); ctx.quadraticCurveTo(90, 128, 96, 112);
+        ctx.fill(); ctx.stroke();
+        // 外框黑邊
+        ctx.strokeStyle = '#111111';
+        ctx.lineWidth = 8;
+        ctx.strokeRect(4, 4, 172, 172);
         var link = document.getElementById('apple-touch-icon-link');
         if (link) link.href = c.toDataURL('image/png');
       } catch(e) {}
@@ -59,24 +75,6 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            bc: {
-              bg: '#090d16',
-              card: '#111827',
-              border: '#1f2937',
-              gold: '#f59e0b',
-              accent: '#38bdf8'
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     :root {
       --safe-top: env(safe-area-inset-top, 0px);
@@ -88,9 +86,18 @@
       box-sizing: border-box;
     }
     body {
-      background-color: #090d16;
-      color: #f3f4f6;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro TC", "PingFang TC", "Helvetica Neue", sans-serif;
+      /* 源自圖片3：經典《貓咪大戰爭》金黃＋亮橘色放射太陽光芒背景 */
+      background-color: #fbbf24;
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.35) 0%, transparent 55%),
+        repeating-conic-gradient(
+          from 0deg at 50% 15%,
+          #fbbf24 0deg 12deg,
+          #f59e0b 12deg 24deg
+        );
+      background-attachment: fixed;
+      color: #111827;
+      font-family: "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
       overscroll-behavior-y: none;
       user-select: none;
       -webkit-user-select: none;
@@ -101,15 +108,14 @@
       font-size: 16px !important; /* 防止 iOS Safari 聚焦自動放大 */
     }
     .safe-pt {
-      padding-top: max(0.75rem, var(--safe-top));
+      padding-top: max(0.65rem, var(--safe-top));
     }
     .safe-pb {
       padding-bottom: max(0.5rem, var(--safe-bottom));
     }
     .main-scroll-area {
-      padding-bottom: calc(5.5rem + var(--safe-bottom));
+      padding-bottom: calc(6.2rem + var(--safe-bottom));
     }
-    /* 隱藏橫向捲軸但保留滑動 */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -117,11 +123,63 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* 傳說稀有彩光漸層 */
+
+    /* ==================== 《貓咪大戰爭》專屬漫畫粗黑框與街機按鈕風格 ==================== */
+    /* 源自圖片1：標題雙層粗黑立體字描邊 */
+    .bc-title-stroke {
+      -webkit-text-stroke: 4px #111111;
+      paint-order: stroke fill;
+      text-shadow: 0 3px 0 #111111;
+    }
+    .bc-text-outline {
+      -webkit-text-stroke: 2.5px #111111;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 0 #111111;
+    }
+    /* 源自圖片2：遊戲內白底粗黑框卡片 + 硬陰影 */
+    .bc-panel {
+      background-color: #fffbeb;
+      border: 3.5px solid #111111;
+      box-shadow: 0 5px 0 #111111;
+    }
+    .bc-card {
+      background-color: #ffffff;
+      border: 3px solid #111111;
+      box-shadow: 0 4px 0 #111111;
+    }
+    .bc-card-unobtained {
+      background-color: #fff1f2;
+      border: 3px solid #be123c;
+      box-shadow: 0 4px 0 #881337;
+    }
+    /* 源自圖片2頂部「選單 / 神」黑圓圖示＋黃膠囊按鈕 */
+    .bc-pill-hud {
+      background: linear-gradient(180deg, #fde047 0%, #f59e0b 100%);
+      border: 2.5px solid #111111;
+      box-shadow: 0 3px 0 #111111;
+      color: #111111;
+    }
+    /* 源自圖片2底部：出陣戰鬥卡槽立體按壓感 */
+    .bc-btn {
+      border: 2.5px solid #111111;
+      box-shadow: 0 3px 0 #111111;
+      transition: transform 0.08s ease, box-shadow 0.08s ease;
+    }
+    .bc-btn:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #111111;
+    }
+    /* 源自圖片2底部：1P 橘紅火焰紋理 與 2P 冰藍科技紋理 */
+    .bc-1p-bar {
+      background: linear-gradient(180deg, #fb923c 0%, #ea580c 55%, #9a3412 100%);
+      border-top: 4px solid #111111;
+    }
+    /* 傳說稀有七彩雷射漸層 + 黑框 */
     .badge-legend {
-      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+      background: linear-gradient(135deg, #ff007f 0%, #7928ca 35%, #00d2ff 70%, #fde047 100%);
       color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+      border: 2px solid #111111;
+      text-shadow: 0 1px 2px #000000;
     }
     .btn-touch {
       min-height: 44px;
@@ -129,41 +187,68 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#090d16] text-slate-100">
+<body class="min-h-screen flex flex-col">
 
-  <!-- 頂部狀態列 (Sticky Header + iOS Safe Area Top) -->
-  <header class="sticky top-0 z-30 bg-[#090d16]/95 backdrop-blur-md border-b border-slate-800/80 safe-pt px-4 pb-2.5">
+  <!-- ==================== 頂部遊戲 HUD 導覽列 (源自圖片1 Logo + 圖片2 頂部選單膠囊) ==================== -->
+  <header class="sticky top-0 z-30 bg-gradient-to-b from-[#262626] to-[#111111] border-b-4 border-[#000000] safe-pt px-3 pb-2.5 shadow-xl">
     <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-slate-950 font-black text-lg">
-          🐾
+      <!-- 左側：紅帽貓咪吉祥物 + 雙色立體粗黑框標題 (源自圖片1「貓咪大戰爭」粉紅+金黃字體) -->
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-b from-yellow-300 to-amber-500 border-[3px] border-black shadow-[0_3px_0_#000] flex items-center justify-center shrink-0 overflow-hidden">
+          <!-- 內嵌 SVG 經典紅帽白貓頭 -->
+          <svg viewBox="0 0 100 100" class="w-10 h-10">
+            <polygon points="22,45 16,14 42,32" fill="#ffffff" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+            <polygon points="78,45 84,14 58,32" fill="#ffffff" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+            <circle cx="50" cy="60" r="32" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+            <ellipse cx="33" cy="28" rx="14" ry="8" transform="rotate(-18 33 28)" fill="#ef4444" stroke="#111111" stroke-width="5"/>
+            <circle cx="38" cy="56" r="4.5" fill="#111111"/>
+            <circle cx="62" cy="56" r="4.5" fill="#111111"/>
+            <path d="M41,66 Q45.5,72 50,66 Q54.5,72 59,66" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round"/>
+          </svg>
         </div>
-        <div>
-          <h1 class="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
-            貓咪補完計劃
-            <span id="dirty-indicator" class="hidden text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">已本機儲存</span>
+
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="px-1.5 py-0.2 rounded bg-red-600 border-2 border-black text-[10px] font-black text-yellow-300 tracking-wider shadow-[0_2px_0_#000]">
+              兩人一起！
+            </span>
+            <span id="dirty-indicator" class="hidden text-[10px] px-1.5 py-0.2 rounded bg-emerald-400 text-black border-2 border-black font-black">
+              ✓本機已存
+            </span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black tracking-tight leading-none mt-0.5 flex items-center gap-0.5">
+            <span class="text-[#ff7eb6] bc-title-stroke">貓咪</span>
+            <span class="text-[#facc15] bc-title-stroke">補完計劃</span>
           </h1>
-          <p id="global-summary-text" class="text-xs text-slate-400">載入圖鑑資料中...</p>
+          <p id="global-summary-text" class="text-[11px] font-bold text-amber-200 truncate mt-0.5">
+            載入圖鑑資料中...
+          </p>
         </div>
       </div>
 
-      <!-- 頂部快速指標膠囊 -->
-      <div class="flex items-center gap-1.5 text-xs">
+      <!-- 右側：仿圖片2頂部「選單 / 神」的黑圓頭＋金黃膠囊 HUD 指標 -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <!-- Google 雲端膠囊 -->
         <button
           id="header-cloud-btn"
           type="button"
-          title="點擊前往雲端同步設定"
-          class="bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-lg px-2 py-1 text-left transition flex items-center gap-1.5"
+          title="點擊前往 Google 試算表雲端同步設定"
+          class="bc-btn flex items-center rounded-full bg-gradient-to-b from-amber-300 to-amber-500 p-0.5 pr-2.5 text-left"
         >
-          <span id="cloud-status-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+          <span class="w-7 h-7 rounded-full bg-neutral-900 border-2 border-black flex items-center justify-center mr-1.5 relative">
+            <span class="text-xs">☁️</span>
+            <span id="cloud-status-dot" class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-neutral-400 border border-black"></span>
+          </span>
           <div>
-            <div class="text-[10px] text-slate-400 leading-tight">Google 雲端</div>
-            <div id="cloud-status-text" class="font-bold text-[11px] text-slate-300 leading-tight">未綁定</div>
+            <div class="text-[9px] font-black text-neutral-900 leading-none">雲端同步</div>
+            <div id="cloud-status-text" class="font-black text-[11px] text-black leading-tight">未綁定</div>
           </div>
         </button>
-        <div class="bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1 text-right">
-          <div class="text-[10px] text-slate-400">圖鑑收集率</div>
-          <div id="header-obtain-rate" class="font-bold text-amber-400">--%</div>
+
+        <!-- 收集率計分板 (仿圖片2右下金錢計數器黑底黃字) -->
+        <div class="rounded-xl bg-black border-2 border-amber-400 px-2.5 py-1 text-right shadow-[0_3px_0_#000]">
+          <div class="text-[9px] font-black text-amber-300 leading-none">圖鑑達成率</div>
+          <div id="header-obtain-rate" class="font-black text-sm sm:text-base text-yellow-300 font-mono leading-tight">--%</div>
         </div>
       </div>
     </div>
@@ -174,24 +259,24 @@
 
     <!-- ==================== TAB 1: 圖鑑檢索與快速打卡 ==================== -->
     <section id="tab-pokedex" class="space-y-3">
-      <!-- 多維度交集篩選面板 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 space-y-2.5 shadow-xl">
+      <!-- 多維度交集篩選面板 (漫畫粗黑框奶油底面板) -->
+      <div class="bc-panel rounded-2xl p-3 space-y-2.5">
         
         <!-- 1. 關鍵字搜尋與清除篩選 -->
         <div class="flex gap-2">
           <div class="relative flex-1">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-700 text-base">🔍</span>
             <input
               id="search-input"
               type="search"
-              placeholder="搜尋貓咪名稱或圖鑑編號 (如: 604.1、凱斯莉)..."
-              class="w-full pl-9 pr-8 py-2 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+              placeholder="搜尋貓咪名稱或編號 (如: 604.1、凱斯莉)..."
+              class="w-full pl-9 pr-8 py-2 bg-white border-[2.5px] border-black rounded-xl text-sm font-bold text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-inner"
             />
-            <button id="clear-search-btn" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1">✕</button>
+            <button id="clear-search-btn" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-black font-black p-1">✕</button>
           </div>
           <button
             id="reset-filters-btn"
-            class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 shrink-0 transition"
+            class="bc-btn px-3 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-black text-yellow-300 shrink-0"
           >
             重置篩選
           </button>
@@ -199,31 +284,31 @@
 
         <!-- 2. 補完狀態快篩 (Quick Status Toggle) -->
         <div class="grid grid-cols-4 gap-1.5" id="status-filter-group">
-          <button data-status="all" class="status-pill btn-touch rounded-xl text-xs font-bold px-2 py-2 border transition flex flex-col items-center justify-center">
+          <button data-status="all" class="status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center">
             <span>全部顯示</span>
-            <span id="count-status-all" class="text-[11px] opacity-80 font-mono">770</span>
+            <span id="count-status-all" class="text-xs font-mono mt-0.5">770</span>
           </button>
-          <button data-status="unobtained" class="status-pill btn-touch rounded-xl text-xs font-bold px-2 py-2 border transition flex flex-col items-center justify-center">
+          <button data-status="unobtained" class="status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center">
             <span>僅看未獲得</span>
-            <span id="count-status-unobtained" class="text-[11px] opacity-80 font-mono">28</span>
+            <span id="count-status-unobtained" class="text-xs font-mono mt-0.5">28</span>
           </button>
-          <button data-status="pending_tf" class="status-pill btn-touch rounded-xl text-xs font-bold px-2 py-2 border transition flex flex-col items-center justify-center">
+          <button data-status="pending_tf" class="status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center">
             <span>待升三階</span>
-            <span id="count-status-tf" class="text-[11px] opacity-80 font-mono">15</span>
+            <span id="count-status-tf" class="text-xs font-mono mt-0.5">15</span>
           </button>
-          <button data-status="pending_uf" class="status-pill btn-touch rounded-xl text-xs font-bold px-2 py-2 border transition flex flex-col items-center justify-center">
+          <button data-status="pending_uf" class="status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center">
             <span>待升四階</span>
-            <span id="count-status-uf" class="text-[11px] opacity-80 font-mono">1</span>
+            <span id="count-status-uf" class="text-xs font-mono mt-0.5">1</span>
           </button>
         </div>
 
         <!-- 3. 稀有度膠囊按鈕 (Multi-select Pills) -->
         <div>
           <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-semibold text-slate-400">稀有度（可複選交集）</span>
-            <button id="clear-rarity-btn" class="hidden text-[11px] text-amber-400 hover:underline">清除稀有度</button>
+            <span class="text-[11px] font-black text-neutral-800">✨ 稀有度篩選（可點選多個交集）</span>
+            <button id="clear-rarity-btn" class="hidden text-[11px] font-black text-red-600 underline">清除稀有度</button>
           </div>
-          <div id="rarity-pills-container" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+          <div id="rarity-pills-container" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
             <!-- JS 動態生成 6 大稀有度膠囊 -->
           </div>
         </div>
@@ -233,7 +318,7 @@
           <div class="sm:col-span-2">
             <select
               id="pool-select"
-              class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-amber-500"
+              class="w-full px-3 py-2.5 bg-white border-[2.5px] border-black rounded-xl text-sm font-black text-neutral-900 shadow-[0_2px_0_#000] focus:outline-none"
             >
               <!-- JS 動態生成 5 大群組 optgroup 與各轉蛋池 -->
             </select>
@@ -241,7 +326,7 @@
           <div>
             <select
               id="sort-select"
-              class="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-amber-500"
+              class="w-full px-3 py-2.5 bg-white border-[2.5px] border-black rounded-xl text-sm font-black text-neutral-900 shadow-[0_2px_0_#000] focus:outline-none"
             >
               <option value="id_asc">🔢 圖鑑編號 (小 → 大)</option>
               <option value="id_desc">🔢 圖鑑編號 (大 → 小)</option>
@@ -252,24 +337,24 @@
         </div>
       </div>
 
-      <!-- 檢索結果統計與批次顯示控制 -->
-      <div class="flex items-center justify-between px-1 text-xs text-slate-400">
-        <div>
-          符合條件：<span id="filtered-count" class="font-bold text-white">0</span> 隻貓咪
-          <span id="active-filter-hint" class="ml-1 text-amber-400"></span>
+      <!-- 檢索結果統計條 (黑底黃字遊戲橫幅) -->
+      <div class="flex items-center justify-between px-3 py-1.5 rounded-xl bg-neutral-900 border-2 border-black text-xs text-white shadow-[0_3px_0_#000]">
+        <div class="font-bold">
+          🎯 符合條件：<span id="filtered-count" class="font-black text-yellow-300 text-sm font-mono">0</span> 隻貓咪
+          <span id="active-filter-hint" class="ml-1 text-amber-300"></span>
         </div>
-        <div class="text-[11px] text-slate-500">
-          點選［四階］自動連動［已獲得＋三階］
+        <div class="text-[11px] font-bold text-amber-300">
+          點［四階］自動連動［獲得＋三階］
         </div>
       </div>
 
       <!-- 貓咪卡片列表 -->
-      <div id="cat-list-container" class="space-y-2.5"></div>
+      <div id="cat-list-container" class="space-y-3"></div>
 
-      <!-- 載入更多觸發器 (避免一次渲染 770 張 DOM 卡頓) -->
+      <!-- 載入更多觸發器 -->
       <div id="load-more-sentinel" class="py-6 text-center hidden">
-        <button id="load-more-btn" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">
-          顯示更多貓咪...
+        <button id="load-more-btn" class="bc-btn px-6 py-3 rounded-2xl bg-yellow-300 hover:bg-yellow-200 text-sm font-black text-black">
+          🐾 載入更多貓咪...
         </button>
       </div>
     </section>
@@ -277,51 +362,51 @@
     <!-- ==================== TAB 2: 尚缺進化素材結算儀表板 ==================== -->
     <section id="tab-materials" class="hidden space-y-3">
       <!-- 頂部控制面板 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-3 shadow-xl">
+      <div class="bc-panel rounded-2xl p-3.5 space-y-3">
         <div class="flex items-start justify-between gap-2">
           <div>
-            <h2 class="text-base font-extrabold text-white flex items-center gap-1.5">
+            <h2 class="text-base font-black text-neutral-900 flex items-center gap-1.5">
               🧪 尚缺進化素材結算儀表板
             </h2>
-            <p id="mat-dashboard-subtitle" class="text-xs text-slate-400 mt-0.5">
+            <p id="mat-dashboard-subtitle" class="text-xs font-bold text-neutral-600 mt-0.5">
               自動加總台版已開放三階／四階但尚未進化的貓咪素材
             </p>
           </div>
-          <div class="text-right shrink-0">
-            <div class="text-[10px] text-slate-400">尚缺總顆數</div>
-            <div id="mat-total-pieces" class="text-lg font-black text-amber-400 font-mono">0</div>
+          <div class="rounded-xl bg-neutral-900 border-2 border-black px-3 py-1 text-right shrink-0 shadow-[0_3px_0_#000]">
+            <div class="text-[10px] font-bold text-amber-300">尚缺總顆數</div>
+            <div id="mat-total-pieces" class="text-lg font-black text-yellow-300 font-mono leading-tight">0</div>
           </div>
         </div>
 
         <!-- 篩選連動開關：包含未獲得貓咪 + 階段過濾 -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-slate-800/80">
-          <label class="flex items-center justify-between sm:justify-start gap-2.5 px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t-2 border-neutral-300">
+          <label class="flex items-center justify-between sm:justify-start gap-2.5 px-3 py-2 rounded-xl bg-white border-2 border-black cursor-pointer shadow-[0_2px_0_#000]">
             <div class="flex items-center gap-2">
-              <input id="toggle-include-unobtained" type="checkbox" class="w-4 h-4 accent-amber-500 rounded" />
-              <span class="text-xs font-bold text-slate-200">包含尚未獲得的貓咪素材</span>
+              <input id="toggle-include-unobtained" type="checkbox" class="w-4 h-4 accent-orange-600 rounded" />
+              <span class="text-xs font-black text-neutral-900">包含尚未獲得的貓咪素材</span>
             </div>
-            <span id="unobtained-evo-count-hint" class="text-[11px] text-slate-400 font-mono">(+0隻)</span>
+            <span id="unobtained-evo-count-hint" class="text-[11px] font-bold text-red-600 font-mono">(+0隻)</span>
           </label>
 
           <!-- 階段合併或分開檢視 -->
-          <div class="grid grid-cols-3 gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800" id="mat-stage-scope-group">
-            <button type="button" data-scope="all" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-bold transition bg-amber-500 text-slate-950">
+          <div class="grid grid-cols-3 gap-1 bg-neutral-900 p-1 rounded-xl border-2 border-black" id="mat-stage-scope-group">
+            <button type="button" data-scope="all" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-black transition bg-yellow-400 text-black">
               三＋四階合計
             </button>
-            <button type="button" data-scope="tf" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-slate-400">
+            <button type="button" data-scope="tf" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-black transition text-neutral-300">
               僅看三階
             </button>
-            <button type="button" data-scope="uf" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-bold transition text-slate-400">
+            <button type="button" data-scope="uf" class="mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-black transition text-neutral-300">
               僅看四階
             </button>
           </div>
         </div>
 
-        <div class="flex items-center justify-between text-[11px] text-slate-400 px-0.5">
-          <span>💡 點擊任一素材卡片可反查「是哪幾隻貓需要它」並直接打卡進化</span>
-          <label class="flex items-center gap-1 cursor-pointer text-slate-300">
-            <input id="toggle-show-zero-mats" type="checkbox" class="accent-amber-500" />
-            <span>顯示不缺 (0顆) 項目</span>
+        <div class="flex items-center justify-between text-[11px] font-bold text-neutral-700 px-0.5">
+          <span>👇 點擊任一素材卡可反查「哪幾隻貓需要它」並直接打卡進化</span>
+          <label class="flex items-center gap-1 cursor-pointer text-neutral-900 font-black">
+            <input id="toggle-show-zero-mats" type="checkbox" class="accent-orange-600" />
+            <span>顯示不缺(0顆)</span>
           </label>
         </div>
       </div>
@@ -333,56 +418,56 @@
     <!-- ==================== TAB 3: 轉蛋池補完率與抽卡建議 ==================== -->
     <section id="tab-gacha" class="hidden space-y-3">
       <!-- 轉蛋決策控制面板 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 space-y-3 shadow-xl">
+      <div class="bc-panel rounded-2xl p-3.5 space-y-3">
         <div class="flex items-start justify-between gap-2">
           <div>
-            <h2 class="text-base font-extrabold text-white flex items-center gap-1.5">
+            <h2 class="text-base font-black text-neutral-900 flex items-center gap-1.5">
               🎰 轉蛋池補完率與抽卡建議
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">
+            <p class="text-xs font-bold text-neutral-600 mt-0.5">
               必中 11 連抽、白金券、傳說券與合作復刻的投資報酬率排行
             </p>
           </div>
-          <div class="text-right shrink-0">
-            <div class="text-[10px] text-slate-400">未集滿轉蛋池</div>
-            <div id="gacha-incomplete-pools-count" class="text-lg font-black text-rose-400 font-mono">-- / 52</div>
+          <div class="rounded-xl bg-neutral-900 border-2 border-black px-3 py-1 text-right shrink-0 shadow-[0_3px_0_#000]">
+            <div class="text-[10px] font-bold text-rose-300">未集滿轉蛋池</div>
+            <div id="gacha-incomplete-pools-count" class="text-lg font-black text-rose-400 font-mono leading-tight">-- / 52</div>
           </div>
         </div>
 
         <!-- 群組快篩膠囊 -->
-        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5" id="gacha-group-pills">
-          <button type="button" data-gacha-group="ALL" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-amber-500 text-slate-950 border-amber-400 shrink-0">
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1" id="gacha-group-pills">
+          <button type="button" data-gacha-group="ALL" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             全部轉蛋池
           </button>
-          <button type="button" data-gacha-group="regular" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-950 text-slate-300 border-slate-800 shrink-0">
+          <button type="button" data-gacha-group="regular" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             🛡️ 常駐系列
           </button>
-          <button type="button" data-gacha-group="fest" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-950 text-slate-300 border-slate-800 shrink-0">
+          <button type="button" data-gacha-group="fest" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             👑 祭典/破壞者
           </button>
-          <button type="button" data-gacha-group="seasonal" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-950 text-slate-300 border-slate-800 shrink-0">
+          <button type="button" data-gacha-group="seasonal" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             🏖️ 季節限定
           </button>
-          <button type="button" data-gacha-group="collab" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-950 text-slate-300 border-slate-800 shrink-0">
+          <button type="button" data-gacha-group="collab" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             🤝 合作限定
           </button>
-          <button type="button" data-gacha-group="other" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-bold border bg-slate-950 text-slate-300 border-slate-800 shrink-0">
+          <button type="button" data-gacha-group="other" class="gacha-grp-pill px-3 py-1.5 rounded-xl text-xs font-black shrink-0">
             🎁 非轉蛋/其他
           </button>
         </div>
 
         <!-- 排序與僅看未滿池開關 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-slate-800/80">
-          <select id="gacha-sort-select" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:outline-none focus:border-amber-500">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t-2 border-neutral-300">
+          <select id="gacha-sort-select" class="w-full px-3 py-2 bg-white border-[2.5px] border-black rounded-xl text-xs font-black text-neutral-900 shadow-[0_2px_0_#000] focus:outline-none">
             <option value="missing_count_desc">🔥 缺漏數量最多優先 (必中/補洞首選)</option>
             <option value="new_rate_desc">📈 未獲得率 (New 率 %) 最高優先</option>
             <option value="uber_missing_desc">💎 缺漏【超激＋傳說】最多優先</option>
             <option value="completion_desc">🏆 收集完成度最高優先</option>
           </select>
 
-          <div class="flex items-center justify-between gap-2 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl">
-            <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-200">
-              <input id="toggle-gacha-only-missing" type="checkbox" class="w-4 h-4 accent-amber-500 rounded" />
+          <div class="flex items-center justify-between gap-2 px-3 py-2 bg-white border-[2.5px] border-black rounded-xl shadow-[0_2px_0_#000]">
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-black text-neutral-900">
+              <input id="toggle-gacha-only-missing" type="checkbox" class="w-4 h-4 accent-orange-600 rounded" />
               <span>僅顯示尚未集滿 (100%) 的池</span>
             </label>
           </div>
@@ -390,30 +475,30 @@
       </div>
 
       <!-- 轉蛋池分析卡片列表 -->
-      <div id="gacha-pools-container" class="space-y-2.5"></div>
+      <div id="gacha-pools-container" class="space-y-3"></div>
     </section>
 
     <!-- ==================== TAB 4: 資料管理與備份 ==================== -->
     <section id="tab-backup" class="hidden space-y-4">
       <!-- ☁️ Google 試算表雲端即時同步模組 -->
-      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/40 border border-sky-500/40 rounded-2xl p-4 space-y-3 shadow-xl">
+      <div class="bc-panel rounded-2xl p-4 space-y-3">
         <div class="flex items-start justify-between gap-2">
           <div>
-            <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+            <h2 class="text-base font-black text-neutral-900 flex items-center gap-2">
               ☁️ Google 試算表雲端即時同步
             </h2>
-            <p class="text-xs text-slate-300 mt-0.5">
+            <p class="text-xs font-bold text-neutral-700 mt-0.5">
               綁定你的 Google Sheets Apps Script 網址後，點擊任何貓咪按鈕都會自動背景寫回雲端試算表，支援 iPhone / iPad / Mac 跨裝置同步！
             </p>
           </div>
-          <span id="backup-cloud-badge" class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono shrink-0">
+          <span id="backup-cloud-badge" class="px-2.5 py-1 rounded-lg bg-neutral-900 border-2 border-black text-yellow-300 text-xs font-mono font-black shrink-0">
             未連線
           </span>
         </div>
 
         <!-- GAS Web App URL 輸入與儲存 -->
         <div class="space-y-1.5">
-          <label for="gas-url-input" class="text-xs font-bold text-sky-300 block">
+          <label for="gas-url-input" class="text-xs font-black text-neutral-900 block">
             🔗 Google Apps Script 網頁應用程式網址 (Web App URL)
           </label>
           <div class="flex flex-col sm:flex-row gap-2">
@@ -421,26 +506,26 @@
               id="gas-url-input"
               type="url"
               placeholder="https://script.google.com/macros/s/AKfycb.../exec"
-              class="flex-1 px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+              class="flex-1 px-3 py-2.5 bg-white border-[2.5px] border-black rounded-xl text-xs font-mono font-bold text-neutral-900 placeholder-neutral-400 focus:outline-none"
             />
             <div class="flex gap-1.5 shrink-0">
               <button
                 id="save-gas-url-btn"
                 type="button"
-                class="btn-touch flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs transition shadow-lg shadow-sky-500/20"
+                class="bc-btn btn-touch flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-sky-400 hover:bg-sky-300 text-black font-black text-xs"
               >
                 儲存並測試連線
               </button>
               <button
                 id="clear-gas-url-btn"
                 type="button"
-                class="btn-touch px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition"
+                class="bc-btn btn-touch px-3 py-2.5 rounded-xl bg-neutral-200 hover:bg-neutral-300 text-neutral-900 font-black text-xs"
               >
                 解除
               </button>
             </div>
           </div>
-          <p id="gas-sync-log" class="text-[11px] text-slate-400 font-mono">
+          <p id="gas-sync-log" class="text-[11px] font-bold text-neutral-700 font-mono">
             狀態：尚未設定 Google 試算表 API 網址
           </p>
         </div>
@@ -450,43 +535,43 @@
           <button
             id="cloud-pull-btn"
             type="button"
-            class="btn-touch py-2.5 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-500/40 text-sky-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+            class="bc-btn btn-touch py-2.5 px-3 rounded-xl bg-sky-300 hover:bg-sky-200 text-black font-black text-xs flex items-center justify-center gap-1.5"
           >
             <span>⬇️ 從試算表拉取最新資料</span>
           </button>
           <button
             id="cloud-push-status-btn"
             type="button"
-            class="btn-touch py-2.5 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+            class="bc-btn btn-touch py-2.5 px-3 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-black text-xs flex items-center justify-center gap-1.5"
           >
             <span>⬆️ 推送目前勾選進度至雲端</span>
           </button>
           <button
             id="cloud-init-full-sheet-btn"
             type="button"
-            class="btn-touch py-2.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-200 font-bold text-xs flex items-center justify-center gap-1.5 transition"
+            class="bc-btn btn-touch py-2.5 px-3 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs flex items-center justify-center gap-1.5"
           >
             <span>🚀 一鍵初始化空白試算表(770筆)</span>
           </button>
         </div>
 
         <!-- 內建三步驟精靈與複製 GAS 程式碼 -->
-        <details class="bg-slate-950/90 border border-slate-800 rounded-xl p-3 text-xs">
-          <summary class="font-bold text-amber-400 cursor-pointer select-none flex items-center justify-between">
+        <details class="bg-white border-[2.5px] border-black rounded-xl p-3 text-xs shadow-[0_3px_0_#000]">
+          <summary class="font-black text-neutral-900 cursor-pointer select-none flex items-center justify-between">
             <span>📖 點此展開：3 分鐘綁定 Google 試算表教學 & 一鍵複製 GAS 程式碼</span>
-            <span class="text-[11px] text-slate-400">▾</span>
+            <span class="text-xs font-black">▾</span>
           </summary>
-          <div class="mt-3 space-y-2.5 text-slate-300 leading-relaxed border-t border-slate-800 pt-2.5">
+          <div class="mt-3 space-y-2.5 text-neutral-800 font-bold leading-relaxed border-t-2 border-neutral-200 pt-2.5">
             <ol class="list-decimal list-inside space-y-1.5 text-xs">
-              <li>開啟 <a href="https://sheets.new" target="_blank" rel="noopener" class="text-sky-400 underline font-bold">Google 試算表 (sheets.new)</a> 建立一張全新空白試算表（或已匯入 CSV 的試算表）。</li>
+              <li>開啟 <a href="https://sheets.new" target="_blank" rel="noopener" class="text-blue-600 underline font-black">Google 試算表 (sheets.new)</a> 建立一張全新空白試算表（或已匯入 CSV 的試算表）。</li>
               <li>點選試算表頂部選單 <strong>「擴充功能」→「Apps Script」</strong>，清空原本內容，點擊下方按鈕複製專用腳本貼上並按儲存（💾）：</li>
             </ol>
-            <div class="flex items-center justify-between bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
-              <span class="text-[11px] font-mono text-emerald-300">支援自動讀取、單筆即時寫回與 770 筆全表初始化</span>
+            <div class="flex items-center justify-between gap-2 bg-neutral-900 text-white px-3 py-2 rounded-xl border-2 border-black">
+              <span class="text-[11px] font-mono text-yellow-300">支援自動讀取、單筆即時寫回與 770 筆全表初始化</span>
               <button
                 id="copy-gas-code-btn"
                 type="button"
-                class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs transition shrink-0"
+                class="bc-btn px-3 py-1.5 rounded-lg bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs shrink-0"
               >
                 📋 一鍵複製 Apps Script 程式碼
               </button>
@@ -501,63 +586,63 @@
       </div>
 
       <!-- 儲存狀態總覽卡片 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3">
+      <div class="bc-panel rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <h2 class="text-base font-black text-neutral-900 flex items-center gap-2">
               💾 本地資料庫狀態
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">
+            <p class="text-xs font-bold text-neutral-600 mt-0.5">
               所有勾選進度皆即時保存在此 iPhone / iPad 的 Safari LocalStorage 中。
             </p>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-400 border-2 border-black text-black text-xs font-mono font-black">
             LocalStorage OK
           </span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-          <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-2.5">
-            <div class="text-[11px] text-slate-400">總收錄貓咪</div>
-            <div id="backup-stat-total" class="text-lg font-black text-white font-mono">770</div>
+          <div class="bg-neutral-900 border-2 border-black rounded-xl p-2.5 text-white">
+            <div class="text-[11px] font-bold text-neutral-400">總收錄貓咪</div>
+            <div id="backup-stat-total" class="text-lg font-black text-yellow-300 font-mono">770</div>
           </div>
-          <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-2.5">
-            <div class="text-[11px] text-slate-400">已獲得 / 未獲得</div>
+          <div class="bg-neutral-900 border-2 border-black rounded-xl p-2.5 text-white">
+            <div class="text-[11px] font-bold text-neutral-400">已獲得 / 未獲得</div>
             <div id="backup-stat-obtained" class="text-lg font-black text-amber-400 font-mono">-- / --</div>
           </div>
-          <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-2.5">
-            <div class="text-[11px] text-slate-400">已升三階 / 開放</div>
+          <div class="bg-neutral-900 border-2 border-black rounded-xl p-2.5 text-white">
+            <div class="text-[11px] font-bold text-neutral-400">已升三階 / 開放</div>
             <div id="backup-stat-tf" class="text-lg font-black text-emerald-400 font-mono">-- / --</div>
           </div>
-          <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-2.5">
-            <div class="text-[11px] text-slate-400">已升四階 / 開放</div>
+          <div class="bg-neutral-900 border-2 border-black rounded-xl p-2.5 text-white">
+            <div class="text-[11px] font-bold text-neutral-400">已升四階 / 開放</div>
             <div id="backup-stat-uf" class="text-lg font-black text-sky-400 font-mono">-- / --</div>
           </div>
         </div>
-        <div class="text-[11px] text-slate-500 flex items-center justify-between pt-1">
+        <div class="text-[11px] font-bold text-neutral-600 flex items-center justify-between pt-1 flex-wrap gap-1">
           <span id="last-saved-time">最後修改時間：尚未修改（使用內建初始資料）</span>
           <span>例外修正：#604.1 鯊魚VS白兔 → 超激稀有 ✓</span>
         </div>
       </div>
 
       <!-- 匯出最新進度 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3">
-        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+      <div class="bc-panel rounded-2xl p-4 space-y-3">
+        <h3 class="text-sm font-black text-neutral-900 flex items-center gap-1.5">
           📤 匯出最新進度（備份／倒回 Notion）
         </h3>
-        <p class="text-xs text-slate-400">
+        <p class="text-xs font-bold text-neutral-600">
           匯出的 CSV 嚴格保持原本的 70 個欄位順序與格式（含 UTF-8 BOM 防亂碼），可直接匯回 Notion 或 Excel。
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <button
             id="export-csv-btn"
-            class="btn-touch w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition"
+            class="bc-btn btn-touch w-full py-3 px-4 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm flex items-center justify-center gap-2"
           >
             <span>📄 匯出最新進度 CSV (70欄完整表)</span>
           </button>
           <button
             id="export-json-btn"
-            class="btn-touch w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 transition"
+            class="bc-btn btn-touch w-full py-3 px-4 rounded-xl bg-white hover:bg-neutral-100 text-neutral-900 font-black text-sm flex items-center justify-center gap-2"
           >
             <span>📦 匯出 JSON 完整備份檔</span>
           </button>
@@ -565,28 +650,28 @@
       </div>
 
       <!-- 匯入 CSV / JSON 更新資料庫 -->
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3">
-        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+      <div class="bc-panel rounded-2xl p-4 space-y-3">
+        <h3 class="text-sm font-black text-neutral-900 flex items-center gap-1.5">
           📥 匯入 CSV / JSON 更新資料庫
         </h3>
-        <p class="text-xs text-slate-400">
+        <p class="text-xs font-bold text-neutral-600">
           當《貓咪大戰爭》改版新增貓咪或開放新三階/四階時，可選擇匯入新表：
         </p>
 
         <!-- 匯入模式選擇 -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
-            <input type="radio" name="import-mode" value="merge" checked class="mt-0.5 accent-amber-500" />
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border-2 border-black cursor-pointer">
+            <input type="radio" name="import-mode" value="merge" checked class="mt-0.5 accent-orange-600" />
             <div>
-              <div class="font-bold text-amber-400">智慧合併模式（推薦）</div>
-              <div class="text-slate-400 text-[11px] mt-0.5">保留手機上已打勾的「獲得/三階/四階/本能」進度，僅更新新貓咪、素材需求與開放進化上限。</div>
+              <div class="font-black text-orange-600">智慧合併模式（推薦）</div>
+              <div class="text-neutral-600 font-bold text-[11px] mt-0.5">保留手機上已打勾的「獲得/三階/四階/本能」進度，僅更新新貓咪、素材需求與開放進化上限。</div>
             </div>
           </label>
-          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer">
-            <input type="radio" name="import-mode" value="overwrite" class="mt-0.5 accent-amber-500" />
+          <label class="flex items-start gap-2.5 p-3 rounded-xl bg-white border-2 border-black cursor-pointer">
+            <input type="radio" name="import-mode" value="overwrite" class="mt-0.5 accent-orange-600" />
             <div>
-              <div class="font-bold text-rose-400">完整覆蓋模式</div>
-              <div class="text-slate-400 text-[11px] mt-0.5">完全以匯入檔案內的 Yes/No 狀態取代手機目前的紀錄（適合還原備份檔）。</div>
+              <div class="font-black text-red-600">完整覆蓋模式</div>
+              <div class="text-neutral-600 font-bold text-[11px] mt-0.5">完全以匯入檔案內的 Yes/No 狀態取代手機目前的紀錄（適合還原備份檔）。</div>
             </div>
           </label>
         </div>
@@ -595,7 +680,7 @@
           <input id="import-file-input" type="file" accept=".csv,.json" class="hidden" />
           <button
             id="trigger-import-btn"
-            class="btn-touch w-full py-3 px-4 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/40 font-bold text-sm flex items-center justify-center gap-2 transition"
+            class="bc-btn btn-touch w-full py-3 px-4 rounded-xl bg-sky-300 hover:bg-sky-200 text-black font-black text-sm flex items-center justify-center gap-2"
           >
             <span>📂 選擇 CSV 或 JSON 檔案匯入...</span>
           </button>
@@ -603,14 +688,14 @@
       </div>
 
       <!-- 重置回內建初始資料 -->
-      <div class="bg-slate-900/60 border border-rose-900/40 rounded-2xl p-4 flex items-center justify-between gap-3">
+      <div class="bg-red-100 border-[3px] border-black rounded-2xl p-4 flex items-center justify-between gap-3 shadow-[0_4px_0_#000]">
         <div>
-          <h3 class="text-sm font-bold text-rose-300">重置為預設 CSV 狀態</h3>
-          <p class="text-xs text-slate-400 mt-0.5">清除手機 LocalStorage 的修改，還原為『貓咪圖鑑15 7v_all.csv』最初的 770 筆狀態。</p>
+          <h3 class="text-sm font-black text-red-900">重置為預設 CSV 狀態</h3>
+          <p class="text-xs font-bold text-red-800 mt-0.5">清除手機 LocalStorage 的修改，還原為『貓咪圖鑑15 7v_all.csv』最初的 770 筆狀態。</p>
         </div>
         <button
           id="reset-storage-btn"
-          class="btn-touch px-4 py-2.5 rounded-xl bg-rose-950 hover:bg-rose-900 text-rose-200 border border-rose-800 text-xs font-bold shrink-0 transition"
+          class="bc-btn btn-touch px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-black shrink-0"
         >
           重置資料
         </button>
@@ -619,55 +704,55 @@
 
   </main>
 
-  <!-- 底部導覽列 (Bottom Tab Bar + iOS Safe Area Bottom) -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#090d16]/95 backdrop-blur-lg border-t border-slate-800/90 safe-pb">
-    <div class="max-w-3xl mx-auto grid grid-cols-4 px-2 pt-1.5">
-      <button data-tab="pokedex" class="nav-tab-btn btn-touch flex flex-col items-center justify-center py-1 rounded-xl text-amber-400">
+  <!-- ==================== 底部導覽列：仿圖片2 底部戰鬥出陣卡槽 + 貓咪砲台底座 ==================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 bc-1p-bar safe-pb shadow-[0_-4px_12px_rgba(0,0,0,0.45)]">
+    <div class="max-w-3xl mx-auto grid grid-cols-4 gap-2 px-2.5 pt-2">
+      <button data-tab="pokedex" class="nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl bg-yellow-300 text-black">
         <span class="text-lg leading-none">🐾</span>
-        <span class="text-[11px] font-bold mt-1">圖鑑打卡</span>
+        <span class="text-[11px] font-black mt-0.5">圖鑑打卡</span>
       </button>
-      <button data-tab="materials" class="nav-tab-btn btn-touch flex flex-col items-center justify-center py-1 rounded-xl text-slate-400">
+      <button data-tab="materials" class="nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl bg-neutral-900 text-neutral-300">
         <div class="relative">
           <span class="text-lg leading-none">🧪</span>
-          <span id="nav-badge-materials" class="absolute -top-1 -right-3 px-1 min-w-[16px] h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">16</span>
+          <span id="nav-badge-materials" class="absolute -top-1.5 -right-3.5 px-1 min-w-[18px] h-4 rounded-full bg-red-600 border-2 border-black text-yellow-300 text-[10px] font-black flex items-center justify-center">16</span>
         </div>
-        <span class="text-[11px] font-bold mt-1">尚缺素材</span>
+        <span class="text-[11px] font-black mt-0.5">尚缺素材</span>
       </button>
-      <button data-tab="gacha" class="nav-tab-btn btn-touch flex flex-col items-center justify-center py-1 rounded-xl text-slate-400">
+      <button data-tab="gacha" class="nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl bg-neutral-900 text-neutral-300">
         <span class="text-lg leading-none">🎰</span>
-        <span class="text-[11px] font-bold mt-1">轉蛋建議</span>
+        <span class="text-[11px] font-black mt-0.5">轉蛋建議</span>
       </button>
-      <button data-tab="backup" class="nav-tab-btn btn-touch flex flex-col items-center justify-center py-1 rounded-xl text-slate-400">
+      <button data-tab="backup" class="nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl bg-neutral-900 text-neutral-300">
         <span class="text-lg leading-none">💾</span>
-        <span class="text-[11px] font-bold mt-1">資料管理</span>
+        <span class="text-[11px] font-black mt-0.5">資料管理</span>
       </button>
     </div>
   </nav>
 
   <!-- 素材反向查詢 Bottom Sheet Modal -->
   <div id="material-modal-backdrop" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="w-full max-w-lg bg-slate-900 border-t sm:border border-slate-700 rounded-t-3xl sm:rounded-3xl max-h-[82vh] flex flex-col shadow-2xl safe-pb">
+    <div class="w-full max-w-lg bg-[#fffbeb] border-t-4 sm:border-4 border-black rounded-t-3xl sm:rounded-3xl max-h-[82vh] flex flex-col shadow-[0_8px_0_#000] safe-pb">
       <!-- Modal Header -->
-      <div class="flex items-center justify-between px-4 py-3.5 border-b border-slate-800">
+      <div class="flex items-center justify-between px-4 py-3.5 border-b-[3px] border-black bg-gradient-to-r from-amber-300 to-yellow-400 rounded-t-2xl">
         <div class="flex items-center gap-2.5">
-          <span id="modal-mat-badge" class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black">🧪</span>
+          <span id="modal-mat-badge" class="w-9 h-9 rounded-xl bg-white border-2 border-black shadow-[0_2px_0_#000] flex items-center justify-center text-base font-black">🧪</span>
           <div>
-            <h3 id="modal-mat-title" class="text-base font-extrabold text-white">素材需求明細</h3>
-            <p id="modal-mat-subtitle" class="text-xs text-slate-400">共 0 隻貓咪需要此素材</p>
+            <h3 id="modal-mat-title" class="text-base font-black text-black">素材需求明細</h3>
+            <p id="modal-mat-subtitle" class="text-xs font-bold text-neutral-800">共 0 隻貓咪需要此素材</p>
           </div>
         </div>
-        <button id="close-mat-modal-btn" class="btn-touch w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold flex items-center justify-center">
+        <button id="close-mat-modal-btn" class="bc-btn btn-touch w-10 h-10 rounded-xl bg-red-500 hover:bg-red-400 text-white font-black flex items-center justify-center">
           ✕
         </button>
       </div>
       <!-- Modal Body: 貓咪清單 -->
-      <div id="modal-mat-cat-list" class="flex-1 overflow-y-auto p-3.5 space-y-2"></div>
+      <div id="modal-mat-cat-list" class="flex-1 overflow-y-auto p-3.5 space-y-2.5"></div>
     </div>
   </div>
 
   <!-- Toast 通知提示 -->
-  <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-200 opacity-0 -translate-y-2">
-    <div id="toast-message" class="px-4 py-2 rounded-full bg-slate-800/95 border border-amber-500/40 text-amber-300 text-xs font-bold shadow-2xl">
+  <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-200 opacity-0 -translate-y-2">
+    <div id="toast-message" class="px-4 py-2 rounded-full bg-neutral-900 border-[3px] border-yellow-400 text-yellow-300 text-xs font-black shadow-[0_4px_0_#000]">
       已更新狀態
     </div>
   </div>
