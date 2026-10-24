@@ -1,0 +1,18 @@
+{
+  "name": "貓咪補完計劃 — 貓咪大戰爭個人圖鑑與養成追蹤",
+  "short_name": "貓咪補完計劃",
+  "description": "《貓咪大戰爭》770隻全圖鑑檢索、三階/四階進化素材缺口結算與轉蛋池補完率分析工具",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%230f172a'/><circle cx='90' cy='96' r='54' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6'/><polygon points='46,66 38,24 74,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><polygon points='134,66 142,24 106,48' fill='%23f8fafc' stroke='%23f59e0b' stroke-width='6' stroke-linejoin='round'/><circle cx='70' cy='90' r='6' fill='%230f172a'/><circle cx='110' cy='90' r='6' fill='%230f172a'/><path d='M82,104 Q90,112 98,104' fill='none' stroke='%230f172a' stroke-width='5' stroke-linecap='round'/><path d='M65,126 L115,126' stroke='%23f59e0b' stroke-width='6' stroke-linecap='round'/></svg>",
+      "sizes": "180x180 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
