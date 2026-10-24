@@ -97,43 +97,43 @@ function doPost(e) {
   }
 }`;
 
-// 稀有度順序與色票設定（《貓咪大戰爭》漫畫粗黑框高飽和配色）
+// 稀有度順序與色票設定（Organic 大地、苔蘚、赤陶、石材與乾草色系）
 const RARITY_ORDER = ['基本', 'EX', '稀有', '激稀有', '超激稀有', '傳說稀有'];
 const RARITY_STYLE = {
   '基本': {
-    badge: 'bg-neutral-200 text-neutral-900 border-2 border-black font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn bg-neutral-800 text-white font-black',
-    pillInactive: 'bc-btn bg-white text-neutral-700 hover:bg-neutral-100',
+    badge: 'bg-[#ddd5c3] text-[#29251d] border border-[#443b2f]/30 font-medium',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 1
   },
   'EX': {
-    badge: 'bg-purple-600 text-white border-2 border-black font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn bg-purple-600 text-white font-black',
-    pillInactive: 'bc-btn bg-purple-100 text-purple-900 hover:bg-purple-200',
+    badge: 'bg-[#b9b28b]/55 text-[#29251d] border border-[#443b2f]/35 font-medium',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 2
   },
   '稀有': {
-    badge: 'bg-sky-500 text-black border-2 border-black font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn bg-sky-400 text-black font-black',
-    pillInactive: 'bc-btn bg-sky-100 text-sky-900 hover:bg-sky-200',
+    badge: 'bg-[#ad7d62]/35 text-[#29251d] border border-[#694737]/40 font-medium',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 3
   },
   '激稀有': {
-    badge: 'bg-amber-400 text-black border-2 border-black font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn bg-amber-400 text-black font-black',
-    pillInactive: 'bc-btn bg-amber-100 text-amber-900 hover:bg-amber-200',
+    badge: 'bg-[#b9b28b] text-[#29251d] border border-[#443b2f]/45 font-semibold',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 4
   },
   '超激稀有': {
-    badge: 'bg-rose-500 text-white border-2 border-black font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn bg-rose-500 text-white font-black',
-    pillInactive: 'bc-btn bg-rose-100 text-rose-900 hover:bg-rose-200',
+    badge: 'bg-[#694737] text-[#f5eddf] border border-[#694737] font-semibold',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 5
   },
   '傳說稀有': {
-    badge: 'badge-legend font-black shadow-[0_2px_0_#000]',
-    pillActive: 'bc-btn badge-legend font-black',
-    pillInactive: 'bc-btn bg-fuchsia-100 text-fuchsia-900 hover:bg-fuchsia-200',
+    badge: 'bg-[#35422d] text-[#f5eddf] border border-[#29251d] font-semibold',
+    pillActive: 'organic-control bg-[#35422d] text-[#f5eddf] border border-[#f5eddf]/40 font-semibold',
+    pillInactive: 'organic-control bg-[#f5eddf]/90 text-[#29251d] border border-[#29251d]/20 hover:bg-[#f5eddf]',
     rank: 6
   }
 };
@@ -155,63 +155,63 @@ const UF_MATERIAL_KEYS = [
   '四紅晶', '四紫晶', '四翠晶', '四蒼晶', '四黃晶'
 ];
 
-// Tab 2 視覺化四大分組定義（合併對應三階 `三...` 與四階 `四...` 欄位）
+// Tab 2 視覺化四大分組定義（搭配小手繪符號與自然大地色階層）
 const MATERIAL_CATEGORIES = [
   {
     id: 'catfruit_normal',
-    title: '🌺 一般貓薄荷（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
+    title: '一般貓薄荷（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
     desc: '雙週一至週五常駐進化關卡、貓薄荷挑戰',
     items: [
-      { baseKey: '紅薄', name: '紅色貓薄荷', short: '紅薄', colorCls: 'bg-rose-500 text-white', dot: '🔴' },
-      { baseKey: '綠薄', name: '綠色貓薄荷', short: '綠薄', colorCls: 'bg-emerald-500 text-white', dot: '🟢' },
-      { baseKey: '藍薄', name: '藍色貓薄荷', short: '藍薄', colorCls: 'bg-sky-500 text-white', dot: '🔵' },
-      { baseKey: '紫薄', name: '紫色貓薄荷', short: '紫薄', colorCls: 'bg-purple-600 text-white', dot: '🟣' },
-      { baseKey: '黃薄', name: '黃色貓薄荷', short: '黃薄', colorCls: 'bg-yellow-400 text-black', dot: '🟡' },
-      { baseKey: '彩薄', name: '彩虹貓薄荷', short: '彩薄', colorCls: 'badge-legend text-white', dot: '🌈' }
+      { baseKey: '紅薄', name: '紅色貓薄荷', short: '紅薄', colorCls: 'bg-[#694737] text-[#f5eddf]', dot: '✾' },
+      { baseKey: '綠薄', name: '綠色貓薄荷', short: '綠薄', colorCls: 'bg-[#35422d] text-[#f5eddf]', dot: '✾' },
+      { baseKey: '藍薄', name: '藍色貓薄荷', short: '藍薄', colorCls: 'bg-[#443b2f] text-[#f5eddf]', dot: '✾' },
+      { baseKey: '紫薄', name: '紫色貓薄荷', short: '紫薄', colorCls: 'bg-[#54423b] text-[#f5eddf]', dot: '✾' },
+      { baseKey: '黃薄', name: '黃色貓薄荷', short: '黃薄', colorCls: 'bg-[#b9b28b] text-[#29251d]', dot: '✾' },
+      { baseKey: '彩薄', name: '彩虹貓薄荷', short: '彩薄', colorCls: 'bg-[#ad7d62] text-[#f5eddf]', dot: '✦' }
     ]
   },
   {
     id: 'catfruit_seed',
-    title: '🌱 一般貓薄荷種子（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
+    title: '一般貓薄荷種子（紅 / 綠 / 藍 / 紫 / 黃 / 彩）',
     desc: '初級／中級進化關卡或彩虹薄荷關卡掉落',
     items: [
-      { baseKey: '紅種', name: '紅貓薄荷種子', short: '紅種', colorCls: 'bg-rose-200 text-rose-950', dot: '🌰' },
-      { baseKey: '綠種', name: '綠貓薄荷種子', short: '綠種', colorCls: 'bg-emerald-200 text-emerald-950', dot: '🌿' },
-      { baseKey: '藍種', name: '藍貓薄荷種子', short: '藍種', colorCls: 'bg-sky-200 text-sky-950', dot: '💧' },
-      { baseKey: '紫種', name: '紫貓薄荷種子', short: '紫種', colorCls: 'bg-purple-200 text-purple-950', dot: '🍇' },
-      { baseKey: '黃種', name: '黃貓薄荷種子', short: '黃種', colorCls: 'bg-yellow-200 text-yellow-950', dot: '🌾' },
-      { baseKey: '彩種', name: '彩虹貓薄荷種子', short: '彩種', colorCls: 'bg-fuchsia-300 text-fuchsia-950', dot: '✨' }
+      { baseKey: '紅種', name: '紅貓薄荷種子', short: '紅種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '◦' },
+      { baseKey: '綠種', name: '綠貓薄荷種子', short: '綠種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '◦' },
+      { baseKey: '藍種', name: '藍貓薄荷種子', short: '藍種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '◦' },
+      { baseKey: '紫種', name: '紫貓薄荷種子', short: '紫種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '◦' },
+      { baseKey: '黃種', name: '黃貓薄荷種子', short: '黃種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '◦' },
+      { baseKey: '彩種', name: '彩虹貓薄荷種子', short: '彩種', colorCls: 'bg-[#ddd5c3] text-[#29251d]', dot: '✧' }
     ]
   },
   {
     id: 'catfruit_special',
-    title: '🔮 特殊薄荷與種子（古代 / 惡魔 / 黃金）',
+    title: '特殊薄荷與種子（古代 / 惡魔 / 黃金）',
     desc: '成長的古代、成長的惡魔、黃金薄荷挑戰與貓咪神社',
     items: [
-      { baseKey: '古薄', name: '古代貓薄荷', short: '古薄', colorCls: 'bg-teal-600 text-white', dot: '🦖' },
-      { baseKey: '古種', name: '古代貓薄荷種子', short: '古種', colorCls: 'bg-teal-200 text-teal-950', dot: '🦕' },
-      { baseKey: '惡薄', name: '惡魔貓薄荷', short: '惡薄', colorCls: 'bg-indigo-700 text-white', dot: '😈' },
-      { baseKey: '惡種', name: '惡魔貓薄荷種子', short: '惡種', colorCls: 'bg-indigo-200 text-indigo-950', dot: '👿' },
-      { baseKey: '金薄', name: '黃金貓薄荷', short: '金薄', colorCls: 'bg-amber-400 text-black', dot: '🪙' },
-      { baseKey: '金種', name: '黃金貓薄荷種子', short: '金種', colorCls: 'bg-amber-200 text-amber-950', dot: '⚜️' }
+      { baseKey: '古薄', name: '古代貓薄荷', short: '古薄', colorCls: 'bg-[#35422d] text-[#f5eddf]', dot: '❖' },
+      { baseKey: '古種', name: '古代貓薄荷種子', short: '古種', colorCls: 'bg-[#ddd5c3] text-[#29251d]', dot: '◇' },
+      { baseKey: '惡薄', name: '惡魔貓薄荷', short: '惡薄', colorCls: 'bg-[#443b2f] text-[#f5eddf]', dot: '❖' },
+      { baseKey: '惡種', name: '惡魔貓薄荷種子', short: '惡種', colorCls: 'bg-[#ddd5c3] text-[#29251d]', dot: '◇' },
+      { baseKey: '金薄', name: '黃金貓薄荷', short: '金薄', colorCls: 'bg-[#b9b28b] text-[#29251d]', dot: '❂' },
+      { baseKey: '金種', name: '黃金貓薄荷種子', short: '金種', colorCls: 'bg-[#eee6d6] text-[#29251d]', dot: '☼' }
     ]
   },
   {
     id: 'behemoth_stones',
-    title: '💎 獸石與獸結晶（紅 / 紫 / 翠 / 蒼 / 黃 / 彩）',
+    title: '獸石與獸結晶（紅 / 紫 / 翠 / 蒼 / 黃 / 彩）',
     desc: '發掘地圖、狩獵地圖（森林／沙漠／火山）與超獸討伐',
     items: [
-      { baseKey: '紅石', name: '紅獸石', short: '紅石', colorCls: 'bg-red-500 text-white', dot: '♦️' },
-      { baseKey: '紫石', name: '紫獸石', short: '紫石', colorCls: 'bg-violet-600 text-white', dot: '🟣' },
-      { baseKey: '翠石', name: '翠獸石', short: '翠石', colorCls: 'bg-emerald-600 text-white', dot: '🟢' },
-      { baseKey: '蒼石', name: '蒼獸石', short: '蒼石', colorCls: 'bg-blue-600 text-white', dot: '🔵' },
-      { baseKey: '黃石', name: '黃獸石', short: '黃石', colorCls: 'bg-yellow-400 text-black', dot: '🟡' },
-      { baseKey: '彩石', name: '虹獸石', short: '彩石', colorCls: 'badge-legend text-white', dot: '🌈' },
-      { baseKey: '紅晶', name: '紅獸結晶', short: '紅晶', colorCls: 'bg-red-700 text-yellow-200', dot: '💎' },
-      { baseKey: '紫晶', name: '紫獸結晶', short: '紫晶', colorCls: 'bg-violet-800 text-yellow-200', dot: '💎' },
-      { baseKey: '翠晶', name: '翠獸結晶', short: '翠晶', colorCls: 'bg-emerald-800 text-yellow-200', dot: '💎' },
-      { baseKey: '蒼晶', name: '蒼獸結晶', short: '蒼晶', colorCls: 'bg-blue-800 text-yellow-200', dot: '💎' },
-      { baseKey: '黃晶', name: '黃獸結晶', short: '黃晶', colorCls: 'bg-amber-600 text-white', dot: '💎' }
+      { baseKey: '紅石', name: '紅獸石', short: '紅石', colorCls: 'bg-[#694737] text-[#f5eddf]', dot: '◆' },
+      { baseKey: '紫石', name: '紫獸石', short: '紫石', colorCls: 'bg-[#443b2f] text-[#f5eddf]', dot: '◆' },
+      { baseKey: '翠石', name: '翠獸石', short: '翠石', colorCls: 'bg-[#35422d] text-[#f5eddf]', dot: '◆' },
+      { baseKey: '蒼石', name: '蒼獸石', short: '蒼石', colorCls: 'bg-[#544b3d] text-[#f5eddf]', dot: '◆' },
+      { baseKey: '黃石', name: '黃獸石', short: '黃石', colorCls: 'bg-[#b9b28b] text-[#29251d]', dot: '◆' },
+      { baseKey: '彩石', name: '虹獸石', short: '彩石', colorCls: 'bg-[#ad7d62] text-[#f5eddf]', dot: '✦' },
+      { baseKey: '紅晶', name: '紅獸結晶', short: '紅晶', colorCls: 'bg-[#694737] text-[#f5eddf]', dot: '◈' },
+      { baseKey: '紫晶', name: '紫獸結晶', short: '紫晶', colorCls: 'bg-[#443b2f] text-[#f5eddf]', dot: '◈' },
+      { baseKey: '翠晶', name: '翠獸結晶', short: '翠晶', colorCls: 'bg-[#35422d] text-[#f5eddf]', dot: '◈' },
+      { baseKey: '蒼晶', name: '蒼獸結晶', short: '蒼晶', colorCls: 'bg-[#544b3d] text-[#f5eddf]', dot: '◈' },
+      { baseKey: '黃晶', name: '黃獸結晶', short: '黃晶', colorCls: 'bg-[#b9b28b] text-[#29251d]', dot: '◈' }
     ]
   }
 ];
@@ -593,37 +593,37 @@ function updateCloudStatusUI(status, message) {
 
   if (dotEl && textEl) {
     if (status === 'syncing') {
-      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-amber-400 border border-black animate-ping';
+      dotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#b9b28b] animate-pulse';
       textEl.textContent = '同步中...';
-      textEl.className = 'font-black text-[11px] text-red-700 leading-tight';
+      textEl.className = 'text-xs font-semibold text-[#694737] leading-tight mt-0.5';
     } else if (status === 'synced') {
-      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-black';
+      dotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#35422d]';
       textEl.textContent = '已連線';
-      textEl.className = 'font-black text-[11px] text-emerald-950 leading-tight';
+      textEl.className = 'text-xs font-semibold text-[#35422d] leading-tight mt-0.5';
     } else if (status === 'error') {
-      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-600 border border-black';
+      dotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#694737]';
       textEl.textContent = '同步失敗';
-      textEl.className = 'font-black text-[11px] text-red-700 leading-tight';
+      textEl.className = 'text-xs font-semibold text-[#694737] leading-tight mt-0.5';
     } else {
-      dotEl.className = 'absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-neutral-400 border border-black';
+      dotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#ad7d62]';
       textEl.textContent = '未綁定';
-      textEl.className = 'font-black text-[11px] text-black leading-tight';
+      textEl.className = 'text-xs font-semibold text-[#29251d] leading-tight mt-0.5';
     }
   }
 
   if (badgeEl) {
     if (status === 'synced') {
-      badgeEl.textContent = '☁️ 雲端連線正常';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-emerald-400 border-2 border-black text-black text-xs font-mono font-black shrink-0';
+      badgeEl.textContent = '雲端連線正常';
+      badgeEl.className = 'px-3 py-1 rounded-full bg-[#b9b28b] text-[#29251d] text-xs font-semibold shrink-0';
     } else if (status === 'syncing') {
-      badgeEl.textContent = '⏳ 雲端同步中...';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-yellow-300 border-2 border-black text-black text-xs font-mono font-black shrink-0';
+      badgeEl.textContent = '雲端同步中...';
+      badgeEl.className = 'px-3 py-1 rounded-full bg-[#f5eddf]/25 text-[#f5eddf] text-xs font-medium shrink-0';
     } else if (status === 'error') {
-      badgeEl.textContent = '⚠️ 連線異常';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-red-500 border-2 border-black text-white text-xs font-mono font-black shrink-0';
+      badgeEl.textContent = '連線異常';
+      badgeEl.className = 'px-3 py-1 rounded-full bg-[#694737] text-[#f5eddf] text-xs font-medium shrink-0';
     } else {
       badgeEl.textContent = '未連線';
-      badgeEl.className = 'px-2.5 py-1 rounded-lg bg-neutral-900 border-2 border-black text-yellow-300 text-xs font-mono font-black shrink-0';
+      badgeEl.className = 'px-3 py-1 rounded-full bg-[#f5eddf]/15 border border-[#f5eddf]/30 text-[#f5eddf] text-xs shrink-0';
     }
   }
 
@@ -942,10 +942,11 @@ function buildFilterControls() {
       <button
         type="button"
         data-rarity="${rarity}"
-        class="rarity-pill shrink-0 px-3 py-1.5 rounded-xl border text-xs font-extrabold transition flex items-center gap-1.5 ${cls}"
+        aria-pressed="${isActive}"
+        class="rarity-pill shrink-0 px-3.5 py-1.5 text-xs flex items-center gap-1.5 ${cls}"
       >
         <span>${rarity}</span>
-        <span class="text-[10px] opacity-80 font-mono">${rarityCounts[rarity] || 0}</span>
+        <span class="font-serif-organic text-xs opacity-85">${rarityCounts[rarity] || 0}</span>
       </button>
     `;
   }).join('');
@@ -964,12 +965,12 @@ function buildFilterControls() {
     }
   }
 
-  let optionsHTML = `<option value="ALL">🎰 全部轉蛋池分類 (${state.cats.length})</option>`;
+  let optionsHTML = `<option value="ALL">全部轉蛋池分類 (${state.cats.length})</option>`;
   for (const group of POOL_GROUPS) {
     // 計算該群組涵蓋的不重複貓咪數
     const groupCatCount = state.cats.filter(c => c.pools.some(p => group.pools.includes(p))).length;
     optionsHTML += `<optgroup label="${group.label}">`;
-    optionsHTML += `<option value="GROUP:${group.key}">📂 篩選整個【${group.label.replace(/^[^\s]+\s\d+\.\s/, '')}】群組 (${groupCatCount})</option>`;
+    optionsHTML += `<option value="GROUP:${group.key}">篩選整個【${group.label.replace(/^[^\s]+\s\d+\.\s/, '')}】群組 (${groupCatCount})</option>`;
     for (const poolName of group.pools) {
       const cnt = poolCounts[poolName] || 0;
       optionsHTML += `<option value="${poolName}">　├ ${poolName} (${cnt})</option>`;
@@ -1011,7 +1012,7 @@ function updateGlobalCounters() {
   const rate = total > 0 ? ((obtainedCount / total) * 100).toFixed(1) : '0.0';
   document.getElementById('header-obtain-rate').textContent = `${rate}%`;
   document.getElementById('global-summary-text').textContent =
-    `已獲 ${obtainedCount}/${total} ‧ 待三階 ${pendingTFCount} ‧ 待四階 ${pendingUFCount}`;
+    `已獲得 ${obtainedCount} / ${total} 隻貓咪 ‧ 待升三階 ${pendingTFCount} 隻 ‧ 待升四階 ${pendingUFCount} 隻`;
 
   // 更新快篩按鈕上的即時數字
   document.getElementById('count-status-all').textContent = total;
@@ -1019,14 +1020,15 @@ function updateGlobalCounters() {
   document.getElementById('count-status-tf').textContent = pendingTFCount;
   document.getElementById('count-status-uf').textContent = pendingUFCount;
 
-  // 更新快篩按鈕高亮樣式（仿圖片2戰鬥介面黃色亮起 vs 白底黑框）
+  // 更新快篩按鈕高亮樣式（Moss active action vs quiet paper outline）
   document.querySelectorAll('#status-filter-group .status-pill').forEach(btn => {
     const st = btn.getAttribute('data-status');
     const active = st === state.filters.status;
-    btn.className = `status-pill btn-touch bc-btn rounded-xl text-xs font-black px-1.5 py-2 flex flex-col items-center justify-center ${
+    btn.setAttribute('aria-pressed', String(active));
+    btn.className = `status-pill btn-touch organic-control px-3 py-2 text-left flex items-baseline justify-between gap-2 ${
       active
-        ? 'bg-gradient-to-b from-yellow-300 to-amber-400 text-black ring-2 ring-orange-500'
-        : 'bg-white text-neutral-800 hover:bg-amber-50'
+        ? 'organic-btn-moss font-semibold'
+        : 'bg-[#eee6d6]/75 hover:bg-[#ddd5c3] text-[#29251d] border border-[#443b2f]/20'
     }`;
   });
 
@@ -1115,18 +1117,18 @@ function formatMaterialPreview(cat) {
   const pills = [];
   if (hasTFOpen(cat) && !cat.tfDone) {
     for (const [k, v] of Object.entries(cat.matsTF)) {
-      pills.push(`<span class="px-1.5 py-0.5 rounded-md bg-emerald-200 border-[1.5px] border-black text-emerald-950 text-[11px] font-mono font-black">${k.slice(1)}×${v}</span>`);
+      pills.push(`<span class="px-2 py-0.5 rounded-full bg-[#35422d]/10 border border-[#35422d]/30 text-[#35422d] text-[11px] font-medium">${k.slice(1)} &times; ${v}</span>`);
     }
   }
   if (hasUFOpen(cat) && !cat.ufDone) {
     for (const [k, v] of Object.entries(cat.matsUF)) {
-      pills.push(`<span class="px-1.5 py-0.5 rounded-md bg-sky-200 border-[1.5px] border-black text-sky-950 text-[11px] font-mono font-black">${k.slice(1)}×${v}</span>`);
+      pills.push(`<span class="px-2 py-0.5 rounded-full bg-[#694737]/12 border border-[#694737]/35 text-[#694737] text-[11px] font-medium">${k.slice(1)} &times; ${v}</span>`);
     }
   }
   if (pills.length === 0) return '';
   return `
-    <div class="mt-2.5 pt-2 border-t-2 border-dashed border-neutral-300 flex items-center gap-1.5 flex-wrap">
-      <span class="text-[11px] text-red-600 font-black">🧪 尚缺進化素材：</span>
+    <div class="mt-3 pt-2.5 border-t border-[#443b2f]/15 flex items-center gap-1.5 flex-wrap">
+      <span class="text-xs text-[#694737] font-medium">◈ 尚缺進化素材：</span>
       ${pills.join('')}
     </div>
   `;
@@ -1137,56 +1139,56 @@ function renderCatCardHTML(cat) {
   const tfOpen = hasTFOpen(cat);
   const ufOpen = hasUFOpen(cat);
 
-  // 開放進化階段標籤色 (高對比黑框徽章)
+  // 開放進化階段標籤色 (Organic earth tones)
   const maxEvoBadge =
     cat.maxEvo === '四階'
-      ? 'bg-sky-300 text-black border-2 border-black font-black shadow-[0_2px_0_#000]'
+      ? 'bg-[#694737]/15 text-[#694737] border border-[#694737]/35 font-medium'
       : cat.maxEvo === '三階'
-      ? 'bg-emerald-300 text-black border-2 border-black font-black shadow-[0_2px_0_#000]'
-      : 'bg-neutral-200 text-neutral-700 border-2 border-black font-bold';
+      ? 'bg-[#35422d]/12 text-[#35422d] border border-[#35422d]/30 font-medium'
+      : 'bg-[#ddd5c3] text-[#443b2f] border border-[#443b2f]/20';
 
   // 轉蛋池多標籤渲染
   const poolBadges = cat.pools
-    .map(p => `<span class="px-2 py-0.5 rounded-lg bg-amber-100 border-[1.5px] border-black text-[11px] font-extrabold text-neutral-900">🏷️ ${p}</span>`)
+    .map(p => `<span class="px-2.5 py-0.5 rounded-full bg-[#eee6d6] border border-[#443b2f]/20 text-xs text-[#443b2f]">◦ ${p}</span>`)
     .join('');
 
-  // 四大狀態切換按鈕樣式 (仿圖片2底部出陣卡槽：啟用時金黃/亮綠/冰藍亮起，未啟用時灰白底黑框)
+  // 四大狀態切換按鈕樣式 (Softly rounded, solid moss actions with quieter outlined alternatives)
   const btnObtainedCls = cat.obtained
-    ? 'bc-btn bg-gradient-to-b from-yellow-300 to-amber-400 text-black font-black'
-    : 'bc-btn bg-neutral-100 text-neutral-500 font-bold hover:bg-neutral-200';
+    ? 'organic-control organic-btn-moss font-semibold'
+    : 'organic-control organic-btn-outline text-[#443b2f]';
 
   const btnTFCls = !tfOpen
-    ? 'border-2 border-neutral-300 bg-neutral-100 text-neutral-400 cursor-not-allowed opacity-60 font-bold'
+    ? 'organic-control bg-[#ddd5c3]/50 border border-[#443b2f]/15 text-[#443b2f]/45 cursor-not-allowed'
     : cat.tfDone
-    ? 'bc-btn bg-gradient-to-b from-emerald-300 to-emerald-500 text-black font-black'
-    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-emerald-50';
+    ? 'organic-control organic-btn-moss font-semibold'
+    : 'organic-control organic-btn-outline text-[#29251d]';
 
   const btnUFCls = !ufOpen
-    ? 'border-2 border-neutral-300 bg-neutral-100 text-neutral-400 cursor-not-allowed opacity-60 font-bold'
+    ? 'organic-control bg-[#ddd5c3]/50 border border-[#443b2f]/15 text-[#443b2f]/45 cursor-not-allowed'
     : cat.ufDone
-    ? 'bc-btn bg-gradient-to-b from-sky-300 to-sky-500 text-black font-black'
-    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-sky-50';
+    ? 'organic-control bg-[#694737] text-[#f5eddf] border border-[#694737] font-semibold'
+    : 'organic-control organic-btn-outline text-[#29251d]';
 
   const btnInstinctCls = cat.instinct
-    ? 'bc-btn bg-gradient-to-b from-pink-400 to-fuchsia-500 text-white font-black'
-    : 'bc-btn bg-white text-neutral-700 font-bold hover:bg-pink-50';
+    ? 'organic-control bg-[#ad7d62] text-[#f5eddf] border border-[#ad7d62] font-semibold'
+    : 'organic-control organic-btn-outline text-[#443b2f]';
 
   return `
     <article
       data-cat-card="${cat.id}"
-      class="${!cat.obtained ? 'bc-card-unobtained' : 'bc-card'} rounded-2xl p-3 transition"
+      class="${!cat.obtained ? 'organic-card-unobtained' : 'organic-card'} p-4"
     >
-      <!-- 卡片頂部：編號、名稱、稀有度、最高開放階數 -->
-      <div class="flex items-start justify-between gap-2">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="px-2 py-0.5 rounded-lg bg-neutral-900 border-2 border-black font-mono text-xs font-black text-yellow-300 shadow-[0_2px_0_#000]">
+      <!-- 卡片頂部：大字襯線編號、名稱、稀有度、最高開放階數 -->
+      <div class="flex items-baseline justify-between gap-2 flex-wrap">
+        <div class="flex items-baseline gap-2.5 flex-wrap">
+          <span class="font-serif-organic text-lg font-semibold text-[#694737]">
             #${cat.id}
           </span>
-          <h3 class="text-base sm:text-lg font-black text-neutral-900 tracking-tight">${cat.name}</h3>
+          <h3 class="font-serif-organic text-lg sm:text-xl font-semibold text-[#29251d]">${cat.name}</h3>
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
-          <span class="px-2 py-0.5 rounded-lg text-[11px] ${rarityStyle}">${cat.rarity}</span>
-          <span class="px-2 py-0.5 rounded-lg text-[11px] ${maxEvoBadge}">最高${cat.maxEvo}</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs ${rarityStyle}">${cat.rarity}</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs ${maxEvoBadge}">最高${cat.maxEvo}</span>
         </div>
       </div>
 
@@ -1195,16 +1197,17 @@ function renderCatCardHTML(cat) {
         ${poolBadges}
       </div>
 
-      <!-- 一鍵打卡按鈕列 (最小高度 44px 符合 iOS 觸控規範) -->
-      <div class="grid grid-cols-4 gap-1.5 mt-2.5">
+      <!-- 一鍵打卡按鈕列 (最小高度 44px 符合觸控與鍵盤聚焦規範) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
         <button
           type="button"
           data-action="toggle"
           data-id="${cat.id}"
           data-field="obtained"
-          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnObtainedCls}"
+          aria-pressed="${cat.obtained}"
+          class="btn-touch px-3 py-2 text-xs flex items-center justify-center gap-1.5 ${btnObtainedCls}"
         >
-          <span>${cat.obtained ? '🐾' : '○'}</span>
+          <span aria-hidden="true">${cat.obtained ? '✓' : '○'}</span>
           <span>已獲得</span>
         </button>
 
@@ -1213,10 +1216,11 @@ function renderCatCardHTML(cat) {
           data-action="toggle"
           data-id="${cat.id}"
           data-field="tfDone"
+          aria-pressed="${cat.tfDone}"
           ${!tfOpen ? 'disabled' : ''}
-          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnTFCls}"
+          class="btn-touch px-3 py-2 text-xs flex items-center justify-center gap-1.5 ${btnTFCls}"
         >
-          <span>${!tfOpen ? '—' : cat.tfDone ? '★' : '⏳'}</span>
+          <span aria-hidden="true">${!tfOpen ? '—' : cat.tfDone ? '✓' : '○'}</span>
           <span>三階</span>
         </button>
 
@@ -1225,10 +1229,11 @@ function renderCatCardHTML(cat) {
           data-action="toggle"
           data-id="${cat.id}"
           data-field="ufDone"
+          aria-pressed="${cat.ufDone}"
           ${!ufOpen ? 'disabled' : ''}
-          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnUFCls}"
+          class="btn-touch px-3 py-2 text-xs flex items-center justify-center gap-1.5 ${btnUFCls}"
         >
-          <span>${!ufOpen ? '—' : cat.ufDone ? '👑' : '⏳'}</span>
+          <span aria-hidden="true">${!ufOpen ? '—' : cat.ufDone ? '✓' : '○'}</span>
           <span>四階</span>
         </button>
 
@@ -1237,9 +1242,10 @@ function renderCatCardHTML(cat) {
           data-action="toggle"
           data-id="${cat.id}"
           data-field="instinct"
-          class="btn-touch rounded-xl text-xs flex items-center justify-center gap-1 ${btnInstinctCls}"
+          aria-pressed="${cat.instinct}"
+          class="btn-touch px-3 py-2 text-xs flex items-center justify-center gap-1.5 ${btnInstinctCls}"
         >
-          <span>${cat.instinct ? '🔥' : '○'}</span>
+          <span aria-hidden="true">${cat.instinct ? '✓' : '○'}</span>
           <span>本能</span>
         </button>
       </div>
@@ -1261,10 +1267,9 @@ function renderCatList(resetLimit = true) {
 
   if (filtered.length === 0) {
     listEl.innerHTML = `
-      <div class="bc-panel rounded-2xl p-8 text-center space-y-2">
-        <div class="text-4xl">😿</div>
-        <div class="text-base font-black text-neutral-900">找不到符合篩選條件的貓咪</div>
-        <p class="text-xs font-bold text-neutral-600">試著清除搜尋字詞或切換上方的稀有度／轉蛋池篩選器。</p>
+      <div class="organic-sheet p-8 text-center space-y-2">
+        <div class="font-serif-organic text-2xl text-[#694737]">查無符合條件的圖鑑紀錄</div>
+        <p class="text-xs text-[#443b2f]">請嘗試清除關鍵字或切換上方的稀有度／轉蛋池分類。</p>
       </div>
     `;
     sentinelEl.classList.add('hidden');
@@ -1277,7 +1282,7 @@ function renderCatList(resetLimit = true) {
   if (filtered.length > state.renderLimit) {
     sentinelEl.classList.remove('hidden');
     const remain = filtered.length - state.renderLimit;
-    document.getElementById('load-more-btn').textContent = `🐾 載入更多貓咪（還有 ${remain} 隻）...`;
+    document.getElementById('load-more-btn').textContent = `展開更多圖鑑紀錄（尚有 ${remain} 隻）...`;
   } else {
     sentinelEl.classList.add('hidden');
   }
@@ -1366,27 +1371,32 @@ function renderMaterialDashboard() {
   document.querySelectorAll('#mat-stage-scope-group .mat-scope-btn').forEach(btn => {
     const sc = btn.getAttribute('data-scope');
     const active = sc === state.matDashboard.stageScope;
-    btn.className = `mat-scope-btn px-2.5 py-1.5 rounded-lg text-xs font-black transition ${
-      active ? 'bg-yellow-400 text-black shadow' : 'text-neutral-300 hover:text-white'
+    btn.setAttribute('aria-pressed', String(active));
+    btn.className = `mat-scope-btn px-3 py-1.5 rounded-[18px_14px_20px_12px] text-xs font-medium transition ${
+      active ? 'bg-[#b9b28b] text-[#29251d] font-semibold' : 'text-[#f5eddf]/80 hover:text-[#f5eddf]'
     }`;
   });
 
-  // 渲染四大分類卡片群組
-  const groupsHTML = MATERIAL_CATEGORIES.map(group => {
+  // 渲染四大分類卡片群組 (Open lists with small drawn symbols & large serif numbers)
+  const groupsHTML = MATERIAL_CATEGORIES.map((group, idx) => {
     const visibleItems = group.items
       .map(item => statsMap[item.baseKey])
       .filter(st => showZero || st.total > 0);
 
     const groupSum = group.items.reduce((s, it) => s + statsMap[it.baseKey].total, 0);
+    const stepNum = String(idx + 1).padStart(2, '0');
 
     if (visibleItems.length === 0) {
       return `
-        <div class="bc-panel rounded-2xl p-3.5 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-black text-neutral-900">${group.title}</h3>
-            <p class="text-[11px] font-bold text-neutral-600">${group.desc}</p>
+        <div class="organic-sheet p-4 sm:p-5 flex items-center justify-between gap-3">
+          <div class="flex items-baseline gap-3">
+            <span class="font-serif-organic text-2xl text-[#ad7d62]">${stepNum}</span>
+            <div>
+              <h3 class="font-serif-organic text-lg font-semibold text-[#29251d]">${group.title}</h3>
+              <p class="text-xs text-[#443b2f]">${group.desc}</p>
+            </div>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-emerald-400 border-2 border-black text-black text-xs font-black">
+          <span class="px-3 py-1 rounded-full bg-[#35422d]/10 border border-[#35422d]/30 text-[#35422d] text-xs font-medium shrink-0">
             ✓ 全數不缺 (0)
           </span>
         </div>
@@ -1396,35 +1406,35 @@ function renderMaterialDashboard() {
     const cardsHTML = visibleItems.map(st => {
       const isZero = st.total === 0;
       const stageBreakdown = [];
-      if (st.tfTotal > 0) stageBreakdown.push(`三階:${st.tfTotal}`);
-      if (st.ufTotal > 0) stageBreakdown.push(`四階:${st.ufTotal}`);
+      if (st.tfTotal > 0) stageBreakdown.push(`三階 ${st.tfTotal}`);
+      if (st.ufTotal > 0) stageBreakdown.push(`四階 ${st.ufTotal}`);
 
       return `
         <button
           type="button"
           data-mat-key="${st.baseKey}"
-          class="mat-card-btn bc-btn text-left p-2.5 rounded-xl flex flex-col justify-between ${
+          class="mat-card-btn organic-control text-left p-3.5 border border-[#443b2f]/25 flex flex-col justify-between ${
             isZero
-              ? 'bg-neutral-200 text-neutral-500 opacity-65'
+              ? 'bg-[#eee6d6]/60 text-[#443b2f]/55'
               : `${st.colorCls}`
           }"
         >
-          <div class="flex items-center justify-between gap-1 w-full">
-            <span class="text-xs font-black flex items-center gap-1 truncate">
-              <span>${st.dot}</span>
+          <div class="flex items-center justify-between gap-1.5 w-full">
+            <span class="text-xs font-medium flex items-center gap-1.5 truncate">
+              <span aria-hidden="true">${st.dot}</span>
               <span>${st.name}</span>
             </span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-black/25 font-mono font-bold shrink-0">
-              ${st.usages.length}隻
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-black/15 shrink-0">
+              ${st.usages.length} 隻需用
             </span>
           </div>
 
-          <div class="mt-2 flex items-baseline justify-between w-full">
-            <div class="text-2xl font-black font-mono tracking-tight">
-              ×${st.total}
+          <div class="mt-3 flex items-baseline justify-between w-full border-t border-current/15 pt-2">
+            <div class="font-serif-organic text-3xl font-semibold tracking-tight leading-none">
+              ${st.total}
             </div>
-            <div class="text-[10px] font-mono font-black opacity-90">
-              ${stageBreakdown.join(' / ') || '不缺'}
+            <div class="text-[11px] opacity-85">
+              ${stageBreakdown.join(' · ') || '不缺'}
             </div>
           </div>
         </button>
@@ -1432,17 +1442,20 @@ function renderMaterialDashboard() {
     }).join('');
 
     return `
-      <div class="bc-panel rounded-2xl p-3.5 space-y-2.5">
-        <div class="flex items-center justify-between gap-2">
-          <div>
-            <h3 class="text-sm font-black text-neutral-900">${group.title}</h3>
-            <p class="text-[11px] font-bold text-neutral-600">${group.desc}</p>
+      <div class="organic-sheet p-4 sm:p-5 space-y-3.5">
+        <div class="flex items-baseline justify-between gap-2 border-b border-[#443b2f]/15 pb-3">
+          <div class="flex items-baseline gap-3">
+            <span class="font-serif-organic text-2xl sm:text-3xl text-[#ad7d62]">${stepNum}</span>
+            <div>
+              <h3 class="font-serif-organic text-lg sm:text-xl font-semibold text-[#29251d]">${group.title}</h3>
+              <p class="text-xs text-[#443b2f]">${group.desc}</p>
+            </div>
           </div>
-          <span class="px-2.5 py-1 rounded-lg bg-neutral-900 border-2 border-black text-yellow-300 text-xs font-mono font-black shrink-0 shadow-[0_2px_0_#000]">
-            小計 ${groupSum} 顆
+          <span class="px-3 py-1 rounded-full bg-[#eee6d6] border border-[#443b2f]/25 text-[#29251d] text-xs font-medium shrink-0">
+            小計 <strong class="font-serif-organic text-sm">${groupSum}</strong> 顆
           </span>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
           ${cardsHTML}
         </div>
       </div>
@@ -1466,12 +1479,12 @@ function openMaterialReverseModal(baseKey) {
 
   badgeEl.textContent = st.dot;
   titleEl.textContent = `${st.name}（尚缺 ×${st.total}）`;
-  subEl.textContent = `共 ${st.usages.length} 筆進化需求（點擊右側按鈕可直接完成進化並扣除素材）`;
+  subEl.textContent = `共 ${st.usages.length} 筆進化需求（點擊右側按鈕可直接打卡完成進化並扣除素材）`;
 
   if (st.usages.length === 0) {
     listEl.innerHTML = `
-      <div class="p-6 text-center text-neutral-700 font-black text-sm">
-        🎉 太棒了！目前沒有任何待進化的貓咪需要【${st.name}】。
+      <div class="p-6 text-center text-[#443b2f] text-sm">
+        目前沒有任何待進化的貓咪需要【${st.name}】。
       </div>
     `;
   } else {
@@ -1479,16 +1492,16 @@ function openMaterialReverseModal(baseKey) {
       const rarityBadge = RARITY_STYLE[cat.rarity]?.badge || '';
       const field = stage === '四階' ? 'ufDone' : 'tfDone';
       return `
-        <div class="bc-card rounded-xl p-3 flex items-center justify-between gap-2">
+        <div class="bg-[#eee6d6] border border-[#443b2f]/25 rounded-[20px_14px_22px_16px] p-3.5 flex items-center justify-between gap-3">
           <div class="space-y-1 min-w-0">
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="px-1.5 py-0.5 rounded bg-neutral-900 text-yellow-300 font-mono text-xs font-black">#${cat.id}</span>
-              <span class="text-sm font-black text-neutral-900 truncate">${cat.name}</span>
-              <span class="px-1.5 py-0.5 rounded text-[10px] ${rarityBadge}">${cat.rarity}</span>
-              ${!cat.obtained ? '<span class="px-1.5 py-0.5 rounded bg-red-600 text-white border border-black text-[10px] font-black">未獲得</span>' : ''}
+            <div class="flex items-baseline gap-2 flex-wrap">
+              <span class="font-serif-organic text-sm font-semibold text-[#694737]">#${cat.id}</span>
+              <span class="font-serif-organic text-base font-semibold text-[#29251d] truncate">${cat.name}</span>
+              <span class="px-2 py-0.5 rounded-full text-[11px] ${rarityBadge}">${cat.rarity}</span>
+              ${!cat.obtained ? '<span class="px-2 py-0.5 rounded-full bg-[#694737] text-[#f5eddf] text-[11px]">未獲得</span>' : ''}
             </div>
-            <div class="text-xs font-bold text-neutral-700 flex items-center gap-2">
-              <span>升${stage}需求：<strong class="text-red-600 font-mono font-black">${st.name} ×${amount}</strong></span>
+            <div class="text-xs text-[#443b2f]">
+              <span>升${stage}需求：<strong class="font-serif-organic text-sm text-[#29251d]">${st.name} &times; ${amount}</strong></span>
             </div>
           </div>
 
@@ -1496,7 +1509,7 @@ function openMaterialReverseModal(baseKey) {
             type="button"
             data-modal-toggle-id="${cat.id}"
             data-modal-toggle-field="${field}"
-            class="bc-btn btn-touch px-3 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black text-xs font-black shrink-0"
+            class="organic-control organic-btn-moss btn-touch px-3.5 py-2 text-xs font-medium shrink-0"
           >
             ✓ 完成${stage}
           </button>
@@ -1514,7 +1527,7 @@ function closeMaterialReverseModal() {
 }
 
 // ============================================================================
-// 5C. TAB 3: 轉蛋池補完率與抽卡建議 (Gacha Pool Analyzer)
+// 5C. TAB 3: 轉蛋池補完率與抽卡建議 (Broad Horizontal Comparison Rows)
 // ============================================================================
 function renderGachaDashboard() {
   const container = document.getElementById('gacha-pools-container');
@@ -1564,10 +1577,11 @@ function renderGachaDashboard() {
   document.querySelectorAll('#gacha-group-pills .gacha-grp-pill').forEach(btn => {
     const gk = btn.getAttribute('data-gacha-group');
     const active = gk === state.gachaAnalyzer.groupKey;
-    btn.className = `gacha-grp-pill bc-btn px-3 py-1.5 rounded-xl text-xs font-black shrink-0 ${
+    btn.setAttribute('aria-pressed', String(active));
+    btn.className = `gacha-grp-pill organic-control px-3.5 py-1.5 text-xs font-medium shrink-0 ${
       active
-        ? 'bg-yellow-400 text-black'
-        : 'bg-white text-neutral-800 hover:bg-amber-50'
+        ? 'organic-btn-moss font-semibold'
+        : 'organic-btn-outline'
     }`;
   });
 
@@ -1597,58 +1611,67 @@ function renderGachaDashboard() {
 
   if (filteredPools.length === 0) {
     container.innerHTML = `
-      <div class="bc-panel rounded-2xl p-8 text-center space-y-2">
-        <div class="text-4xl">🎉</div>
-        <div class="text-base font-black text-neutral-900">此分類下的轉蛋池已 100% 全部集滿！</div>
+      <div class="organic-sheet p-8 text-center space-y-2">
+        <div class="font-serif-organic text-2xl text-[#35422d]">此分類下的轉蛋池已 100% 全部集滿</div>
       </div>
     `;
     return;
   }
 
-  container.innerHTML = filteredPools.map(p => {
+  // 寬幅比較列 (Comparison rows divide identity, details, and action across a shared width; featured row stays moss)
+  container.innerHTML = filteredPools.map((p, index) => {
     const isComplete = p.missingCount === 0;
-    const barColor = isComplete
-      ? 'bg-emerald-500'
-      : p.newRate >= 35
-      ? 'bg-rose-500'
-      : p.newRate >= 15
-      ? 'bg-amber-500'
-      : 'bg-sky-500';
+    const isFeatured = !isComplete && index === 0; // 第一順位推薦池保持 Moss 強調背景
 
-    // 抽卡建議標籤
+    const rowSurfaceCls = isFeatured
+      ? 'organic-moss-basin p-4 sm:p-5 ring-1 ring-inset ring-[#b9b28b]/50'
+      : 'organic-card p-4 sm:p-5';
+
+    const titleColor = isFeatured ? 'text-[#f5eddf]' : 'text-[#29251d]';
+    const subColor = isFeatured ? 'text-[#b9b28b]' : 'text-[#694737]';
+    const mutedColor = isFeatured ? 'text-[#f5eddf]/80' : 'text-[#443b2f]';
+    const barTrackCls = isFeatured ? 'bg-[#29251d]/45 border-[#f5eddf]/25' : 'bg-[#ddd5c3] border-[#443b2f]/20';
+    const barFillCls = isComplete
+      ? 'bg-[#35422d]'
+      : isFeatured
+      ? 'bg-[#b9b28b]'
+      : 'bg-[#694737]';
+
     let adviceBadge = '';
     if (isComplete) {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-emerald-400 border-2 border-black text-black text-[11px] font-black shadow-[0_2px_0_#000]">🏆 已全齊制霸</span>`;
-    } else if (p.newRate >= 40 || p.missingCount >= 4) {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-red-600 border-2 border-black text-yellow-300 text-[11px] font-black shadow-[0_2px_0_#000]">🔥 必中11連極推 (New ${p.newRate.toFixed(1)}%)</span>`;
+      adviceBadge = `<span class="px-2.5 py-0.5 rounded-full bg-[#35422d]/15 text-[#35422d] border border-[#35422d]/30 text-xs font-medium">已全齊制霸</span>`;
+    } else if (isFeatured) {
+      adviceBadge = `<span class="px-2.5 py-0.5 rounded-full bg-[#b9b28b] text-[#29251d] text-xs font-semibold">★ 首選推薦池 &middot; New ${p.newRate.toFixed(1)}%</span>`;
     } else {
-      adviceBadge = `<span class="px-2 py-0.5 rounded-lg bg-yellow-300 border-2 border-black text-black text-[11px] font-black shadow-[0_2px_0_#000]">🎯 缺 ${p.missingCount} 隻 (New ${p.newRate.toFixed(1)}%)</span>`;
+      adviceBadge = `<span class="px-2.5 py-0.5 rounded-full bg-[#694737]/15 text-[#694737] border border-[#694737]/30 text-xs font-medium">尚缺 ${p.missingCount} 隻 &middot; New ${p.newRate.toFixed(1)}%</span>`;
     }
 
-    // 缺漏貓咪名單膠囊（點擊可直接跳轉圖鑑或直接打卡獲得）
     const missingBadgesHTML = isComplete
-      ? `<div class="text-xs text-emerald-700 font-black">✨ 此池全數貓咪皆已入手！</div>`
+      ? `<div class="text-xs ${mutedColor}">✦ 此轉蛋池全數貓咪皆已收錄完成。</div>`
       : `
-        <div class="pt-2.5 border-t-2 border-dashed border-neutral-300 space-y-2">
-          <div class="text-[11px] font-bold text-neutral-700 flex items-center justify-between flex-wrap gap-1">
-            <span>缺漏貓咪名單（點擊可直接標記為「已獲得 🐾」）：</span>
-            <button type="button" data-jump-pool="${p.poolName}" class="text-red-600 hover:underline font-black">
+        <div class="pt-3 border-t ${isFeatured ? 'border-[#f5eddf]/20' : 'border-[#443b2f]/15'} space-y-2">
+          <div class="text-xs ${mutedColor} flex items-center justify-between flex-wrap gap-1">
+            <span>缺漏貓咪名單（點擊可直接標記為「已獲得 ✓」）：</span>
+            <button type="button" data-jump-pool="${p.poolName}" class="${isFeatured ? 'text-[#b9b28b]' : 'text-[#694737]'} underline font-medium">
               於圖鑑檢視此池 →
             </button>
           </div>
           <div class="flex flex-wrap gap-1.5">
             ${p.missingCats.map(mc => {
-              const rBadge = RARITY_STYLE[mc.rarity]?.badge || '';
               return `
                 <button
                   type="button"
                   data-quick-obtain-id="${mc.id}"
-                  class="bc-btn px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-yellow-200 text-xs flex items-center gap-1.5"
+                  class="organic-control px-3 py-1.5 ${
+                    isFeatured
+                      ? 'bg-[#f5eddf]/12 hover:bg-[#f5eddf]/22 text-[#f5eddf] border border-[#f5eddf]/30'
+                      : 'bg-[#eee6d6] hover:bg-[#ddd5c3] text-[#29251d] border border-[#443b2f]/25'
+                  } text-xs flex items-center gap-1.5"
                 >
-                  <span class="px-1.5 py-0.2 rounded bg-neutral-900 font-mono text-[11px] text-yellow-300 font-black">#${mc.id}</span>
-                  <span class="font-black text-neutral-900">${mc.name}</span>
-                  <span class="px-1.5 py-0.2 rounded text-[10px] ${rBadge}">${mc.rarity}</span>
-                  <span class="text-emerald-700 font-black text-[11px] ml-0.5">+入手</span>
+                  <span class="font-serif-organic font-semibold">#${mc.id}</span>
+                  <span class="font-medium">${mc.name}</span>
+                  <span class="text-[11px] opacity-75">(${mc.rarity})</span>
+                  <span class="underline text-[11px] ml-0.5">+入手</span>
                 </button>
               `;
             }).join('')}
@@ -1657,23 +1680,27 @@ function renderGachaDashboard() {
       `;
 
     return `
-      <article class="bc-card rounded-2xl p-3.5 space-y-2.5">
-        <div class="flex items-start justify-between gap-2">
-          <div>
-            <div class="text-[11px] font-black text-orange-700 uppercase tracking-wider">${p.groupLabel}</div>
-            <h3 class="text-base sm:text-lg font-black text-neutral-900 mt-0.5">${p.poolName}</h3>
+      <article class="${rowSurfaceCls} space-y-3">
+        <!-- Broad Horizontal Comparison Row: Identity | Details | Action/Progress -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+          <div class="md:col-span-5">
+            <div class="text-[11px] uppercase tracking-wider font-medium ${subColor}">${p.groupLabel}</div>
+            <h3 class="font-serif-organic text-xl font-semibold ${titleColor} mt-0.5">${p.poolName}</h3>
           </div>
-          <div class="flex flex-col items-end gap-1 shrink-0">
-            ${adviceBadge}
-            <span class="text-xs font-mono font-black text-neutral-800">
-              已獲 <strong class="text-red-600">${p.obtainedCount}</strong> / ${p.total} 隻 (${p.completionRate.toFixed(1)}%)
-            </span>
-          </div>
-        </div>
 
-        <!-- 進度條 (粗黑邊遊戲血條風) -->
-        <div class="w-full h-3.5 bg-neutral-900 rounded-full overflow-hidden border-2 border-black p-0.5">
-          <div class="h-full rounded-full ${barColor} transition-all duration-300" style="width: ${p.completionRate.toFixed(1)}%"></div>
+          <div class="md:col-span-4 space-y-1.5">
+            <div class="flex items-baseline justify-between text-xs ${mutedColor}">
+              <span>收錄進度</span>
+              <span class="font-serif-organic text-base font-semibold ${titleColor}">${p.obtainedCount} / ${p.total} 隻 (${p.completionRate.toFixed(1)}%)</span>
+            </div>
+            <div class="w-full h-2 rounded-full overflow-hidden border ${barTrackCls}">
+              <div class="h-full rounded-full ${barFillCls}" style="width: ${p.completionRate.toFixed(1)}%"></div>
+            </div>
+          </div>
+
+          <div class="md:col-span-3 flex md:justify-end items-center">
+            ${adviceBadge}
+          </div>
         </div>
 
         ${missingBadgesHTML}
@@ -1819,8 +1846,11 @@ function switchTab(tabName) {
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
     const t = btn.getAttribute('data-tab');
     const isActive = t === tabName;
-    btn.className = `nav-tab-btn btn-touch bc-btn flex flex-col items-center justify-center py-1.5 rounded-xl ${
-      isActive ? 'bg-yellow-300 text-black' : 'bg-neutral-900 text-neutral-300 hover:bg-neutral-800'
+    btn.setAttribute('aria-current', isActive ? 'page' : 'false');
+    btn.className = `nav-tab-btn btn-touch organic-control flex flex-col items-center justify-center py-1.5 ${
+      isActive
+        ? 'organic-btn-moss font-semibold'
+        : 'bg-transparent text-[#443b2f] hover:bg-[#eee6d6]'
     }`;
   });
 
@@ -2107,4 +2137,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderMaterialDashboard();
   renderGachaDashboard();
   bindEvents();
+  switchTab('pokedex');
 });

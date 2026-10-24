@@ -4,8 +4,8 @@
   "description": "《貓咪大戰爭》770隻全圖鑑檢索、三階/四階進化素材缺口結算與轉蛋池補完率分析工具",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fbbf24",
-  "theme_color": "#fbbf24",
+  "background_color": "#eee6d6",
+  "theme_color": "#eee6d6",
   "orientation": "portrait-primary",
   "icons": [
     {
